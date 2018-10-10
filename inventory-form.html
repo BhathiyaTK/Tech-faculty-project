@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" type="text/css" href="inventory-form-style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<title>Add the Inventory</title>
+</head>
+<body>
+	<section>
+		<div id="form-section">
+			<div class="form-title">
+				<h1>Inventory Data Submission</h1>
+			</div>
+			<form>
+				<div class="form-row">
+				    <div class="form-group col-md-6">
+				      	<label for="inputState">Main Location</label>
+				      	<select id="inputState" class="form-control">
+				      		<option selected>Choose...</option>
+				        	<option>(A) Old Building</option>
+				        	<option>(B) New Building</option>
+				        	<option>(C) Physics Lab</option>
+				        	<option>(D) Chemistry Lab</option>
+				        	<option>(E) Bio Lab</option>
+				        	<option>(F) All</option>
+				      	</select>
+				    </div>
+				    <div class="form-group col-md-6">
+					    <label for="inputState">Sub Location</label>
+				      	<select id="inputState" class="form-control">
+				      		<option selected>Choose...</option>
+				        	<option>...</option>
+				      	</select>
+				    </div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-8">
+					    <label for="inputState">Main Inventory Item</label>
+				      	<select id="inputState" class="form-control">
+				      		<option selected>Choose...</option>
+				        	<option>(A.1.1) Chair </option>
+				        	<option>(A.1.2) Table </option>
+				        	<option>(A.1.3) Drawer Cupboard Steel </option>
+				        	<option>(A.1.4) Book Rack </option>
+				        	<option>(A.1.5) Computer </option>
+				        	<option>(A.1.6) Steel Cupboard </option>
+				        	<option>(A.1.7) Photocopy Machines </option>
+				        	<option>(A.1.8) Project & Screen </option>
+				        	<option>(A.1.9) Network Cable </option>
+				      	</select>
+					</div>
+				</div>
+				<div class="form-row">
+				    <div class="form-group col-md-6">
+				      	<label for="inputState">Sub Inventory Item</label>
+				      	<select id="inputState" class="form-control">
+				      		<option selected>Choose...</option>
+				        	<option>(A.1.1.1) Small Rotation Chair</option>
+				        	<option>(A.1.1.2) Main Chair(Room's)</option>
+				        	<option>(A.1.1.3) Visitor Chair</option>
+				        	<option>(A.1.1.4) Dining Table Chair</option>
+				        	<option>(A.1.1.5) Four Set Chair</option>
+				        	<option>(A.1.1.6) Lobby Chair</option>
+				        	<option>(A.1.2.1) Computer Table</option>
+				        	<option>(A.1.2.2) Wood Table big</option>
+				        	<option>(A.1.2.3) Wood Table small</option>
+				        	<option>(A.1.2.4) Steel Table</option>
+				        	<option>(A.1.2.5) Board Room Table</option>
+				        	<option>(A.1.4.1) Big</option>
+				        	<option>(A.1.4.2) Small</option>
+				        	<option>(A.1.10.1) Ceeling Fan</option>
+				        	<option>(A.1.10.2) Wall Fan</option>
+				        	<option>(A.1.10.3) Stand Fan</option>
+				      	</select>
+				    </div>
+				    <div class="form-group col-md-3">
+				      	<label for="inputZip">Quantity</label>
+				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter Quantity...">
+				    </div>
+				</div>
+				<button type="submit" class="btn btn-primary">Submit Inventory Data</button>
+			</form>
+		</div>
+	</section>
+</body>
+</html>
