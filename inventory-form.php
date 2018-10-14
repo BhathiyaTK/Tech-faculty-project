@@ -11,6 +11,7 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 	<title>Inventory Submission</title>
 </head>
 <body>
@@ -19,29 +20,12 @@
 			<div class="form-title">
 				<h1>Inventory Data Submission</h1>
 			</div>
-			<form>
+			<div class="form-divider"></div>
+			<form action="inventory-form.php" method="POST" id="inventory_form">
 				<div class="form-row">
-					<legend>Main Location</legend>
-				    <div class="form-group col-md-6">
-				    	<div class="form-check">
-						  	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="old_building">
-						  	<label class="form-check-label" for="exampleRadios1">
-						    	(A) Old Building
-						  	</label>
-						</div>
-						<div class="form-check">
-						  	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="new_building">
-						  	<label class="form-check-label" for="exampleRadios1">
-						    	(B) New Building
-						  	</label>
-						</div>
-						<div class="form-check">
-						  	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="physics">
-						  	<label class="form-check-label" for="exampleRadios1">
-						    	(C) Physics Lab
-						  	</label>
-						</div>
-				      	<!--select id="inputState1" class="form-control">
+				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
+				    	<legend>Main Location</legend>
+				    	<select id="main_location" class="form-control" name="main_location">
 				      		<option value="" selected>Choose...</option>
 				        	<option value="old_building">(A) Old Building</option>
 				        	<option value="new_building">(B) New Building</option>
@@ -49,33 +33,11 @@
 				        	<option value="chemistry">(D) Chemistry Lab</option>
 				        	<option value="bio">(E) Bio Lab</option>
 				        	<option value="all">(F) All</option>
-				      	</select-->
+				      	</select>	
 				    </div>
-				    <div class="form-group col-md-6">
-				    	<div class="form-check">
-						  	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="chemistry">
-						  	<label class="form-check-label" for="exampleRadios1">
-						    	(D) Chemistry Lab
-						  	</label>
-						</div>
-						<div class="form-check">
-						  	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios5" value="bio">
-						  	<label class="form-check-label" for="exampleRadios1">
-						    	(E) Bio Lab
-						  	</label>
-						</div>
-						<div class="form-check">
-						  	<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios6" value="all">
-						  	<label class="form-check-label" for="exampleRadios1">
-						    	(F) All
-						  	</label>
-						</div>
-				    </div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
+				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 					    <legend for="inputState">Sub Location</legend>
-				      	<select id="sub_locations" class="form-control">
+				      	<select id="sub_locations" class="form-control" name="sub_locations">
 				      		<option value="" selected>Choose...</option>
 				        	<option value="old_building 1">(A.1) Department of Engineering Technology</option>
 				        	<option value="OL-old_building 2">(A.2) Mr. Nalin's Room</option>
@@ -102,69 +64,123 @@
 				        	<option value="AL-all 1">(F.1) All</option>
 				      	</select>
 				    </div>
-					<div class="form-group col-md-6">
-					    <legend for="inputState">Main Inventory Item</legend>
-				      	<select id="inputState" class="form-control">
-				      		<option selected>Choose...</option>
-				        	<option>(A.1.1) Chair </option>
-				        	<option>(A.1.2) Table </option>
-				        	<option>(A.1.3) Drawer Cupboard Steel </option>
-				        	<option>(A.1.4) Book Rack </option>
-				        	<option>(A.1.5) Computer </option>
-				        	<option>(A.1.6) Steel Cupboard </option>
-				        	<option>(A.1.7) Photocopy Machines </option>
-				        	<option>(A.1.8) Project & Screen </option>
-				        	<option>(A.1.9) Network Cable </option>
-				      	</select>
-					</div>
 				</div>
 				<div class="form-row">
-				    <div class="form-group col-md-6">
+					<div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
+					    <legend for="inputState">Main Inventory Item</legend>
+				      	<select id="main_inventory_items" class="form-control" name="main_inventory_items">
+				      		<option value="" selected>Choose...</option>
+				        	<option value="chair">(A.1.1) Chair </option>
+				        	<option value="table">(A.1.2)Table </option>
+				        	<option value="drawer_cupborad_steel">(A.1.3) Drawer Cupboard Steel </option>
+				        	<option value="book_rack">(A.1.4) Book Rack </option>
+				        	<option value="computer">(A.1.5) Computer </option>
+				        	<option value="steel_cupboard">(A.1.6) Steel Cupboard </option>
+				        	<option value="photocopy_machine">(A.1.7) Photocopy Machines </option>
+				        	<option value="project_sreen">(A.1.8) Project & Screen </option>
+				        	<option value="network_cable">(A.1.9) Network Cable </option>
+				        	<option value="fan">(A.1.10) Fan</option>
+				      	</select>
+					</div>
+					<div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 				      	<legend for="inputState">Sub Inventory Item</legend>
-				      	<select id="inputState" class="form-control">
-				      		<option selected>Choose...</option>
-				        	<option>(A.1.1.1) Small Rotation Chair</option>
-				        	<option>(A.1.1.2) Main Chair(Room's)</option>
-				        	<option>(A.1.1.3) Visitor Chair</option>
-				        	<option>(A.1.1.4) Dining Table Chair</option>
-				        	<option>(A.1.1.5) Four Set Chair</option>
-				        	<option>(A.1.1.6) Lobby Chair</option>
-				        	<option>(A.1.2.1) Computer Table</option>
-				        	<option>(A.1.2.2) Wood Table big</option>
-				        	<option>(A.1.2.3) Wood Table small</option>
-				        	<option>(A.1.2.4) Steel Table</option>
-				        	<option>(A.1.2.5) Board Room Table</option>
-				        	<option>(A.1.4.1) Big</option>
-				        	<option>(A.1.4.2) Small</option>
-				        	<option>(A.1.10.1) Ceeling Fan</option>
-				        	<option>(A.1.10.2) Wall Fan</option>
-				        	<option>(A.1.10.3) Stand Fan</option>
+				      	<select id="sub_inventory_items" class="form-control" name="sub_inventory_items">
+				      		<option value="" selected>Choose...</option>
+				        	<option value="CH-chair 1">(A.1.1.1) Small Rotation Chair</option>
+				        	<option value="CH-chair 2">(A.1.1.2) Main Chair(Room's)</option>
+				        	<option value="CH-chair 3">(A.1.1.3) Visitor Chair</option>
+				        	<option value="CH-chair 4">(A.1.1.4) Dining Table Chair</option>
+				        	<option value="CH-chair 5">(A.1.1.5) Four Set Chair</option>
+				        	<option value="CH-chair 6">(A.1.1.6) Lobby Chair</option>
+				        	<option value="TA-table 1">(A.1.2.1) Computer Table</option>
+				        	<option value="TA-table 2">(A.1.2.2) Wood Table big</option>
+				        	<option value="TA-table 3">(A.1.2.3) Wood Table small</option>
+				        	<option value="TA-table 4">(A.1.2.4) Steel Table</option>
+				        	<option value="TA-table 5">(A.1.2.5) Board Room Table</option>
+				        	<option value="DR-drawer_cupborad_steel 1">N/A</option>
+				        	<option value="BO-book_rack 1">(A.1.4.1) Big</option>
+				        	<option value="BO-book_rack 2">(A.1.4.2) Small</option>
+				        	<option value="CO-computer 1">N/A</option>
+				        	<option value="ST-steel_cupboard 1">N/A</option>
+				        	<option value="PH-photocopy_machine 1">N/A</option>
+				        	<option value="PR-project_sreen 1">N/A</option>
+				        	<option value="NE-network_cable 1">N/A</option>
+				        	<option value="FA-fan 1">(A.1.10.1) Ceeling Fan</option>
+				        	<option value="FA-fan 2">(A.1.10.2) Wall Fan</option>
+				        	<option value="FA-fan 3">(A.1.10.3) Stand Fan</option>
 				      	</select>
 				    </div>
-				    <div class="form-group col-md-3">
+				</div>
+				<div class="form-row" id="quantity-form-row">
+				    <div class="form-group col-sm-12 col-md-4 col-lg-4">
 				      	<legend for="inputZip">Quantity</legend>
-				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter Quantity...">
+				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter Quantity..." name="quantity">
 				    </div>
 				</div>
-				<button type="submit" class="btn btn-success">Submit Inventory Data</button>
+				<div class="form-divider-bottom"></div>
+				<div id="submit-button-div">
+					<button type="submit" class="btn btn-success">Submit Inventory Data</button>
+				</div>
 			</form>
+		</div>
+		<div id="back-to-home-button">
+			<a class="btn btn-danger" href="home.php">Back to Home</a>
 		</div>
 	</section>
 
 	<script type="text/javascript">
+
+		$(document).ready(function(){
+			$("#inventory_form").validate({
+            	rules: {
+            		main_location: "required",
+            		sub_locations: "required",
+            		main_inventory_items: "required",
+            		sub_inventory_items: "required",
+            		quantity: "required"
+            	},
+        		messages: {
+        			main_location: "Please select main lacation",
+			      	sub_locations: "Please select sub location",
+			      	main_inventory_items: "Please select main inventory item",
+			      	sub_inventory_items: "Please select sub inventory item",
+			      	quantity: "Please enter item quantity"
+			    },
+
+			    submitHandler: function(form) {
+			      	form.submit();
+			    }
+            });
+		});
+
 		$(function(){
     
-		    var select = $('#sub_locations'),
-		        options = select.find('option');
+		    var select = $('#main_location'),
+		    	options = select.find('option'),
+		    	select0 = $('#sub_locations'),
+		        options0 = select0.find('option'),
+		        select1 = $('#main_inventory_items'),
+		        options1 = select1.find('option'),
+		        select2 = $('#sub_inventory_items'),
+		        options2 = select2.find('option');
 		    
-		    $('[type="radio"]').click(function(){
-		        var visibleItems = options.filter('[value*="' + $(this).val()  + '"]').show();
-		        options.not(visibleItems).hide();
+		    $(options).click(function(){
+		        var visibleItems = options0.filter('[value*="' + $(this).val()  + '"]').show();
+		        options0.not(visibleItems).hide();
 		        
 		        if(visibleItems.length > 0)
 		        {
-		            select.val(visibleItems.eq(0).val());
+		            select0.val(visibleItems.eq(0).val());
 		        }
+		    });
+		    $(options1).click(function(){
+		    	var visibleItems1 = options2.filter('[value*="' + $(this).val() + '"]').show();
+		    	options2.not(visibleItems1).hide();
+
+		    	if (visibleItems1.length > 0) 
+		    	{
+		    		select2.val(visibleItems1.eq(0).val());
+		    	}
 		    });
 		});
 	</script>
