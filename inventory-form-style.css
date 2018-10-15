@@ -17,6 +17,7 @@ section{
 	padding: 30px 0;
 	background-color: rgba(0,0,0,0.8);
 	border-radius: 20px;
+	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
 }
 #form-section .form-title h1{
 	font-family: Roboto;
@@ -65,6 +66,7 @@ form .form-row .sub-form-row-left{
 	width: 60%;
 	margin: 0 auto;
 	margin-top: 20px;
+	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
 }
 #submit-button-div{
 	text-align: center;
