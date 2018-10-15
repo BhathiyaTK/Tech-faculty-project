@@ -17,26 +17,31 @@
 <body>
 	<section>
 		<div id="home-page-content">
-			<div class="home-page-title">
-				<h1>Technology Faculty - SUSL</h1>
-				<h3>Inventory Management System</h3>
+			<div id="page-header">
+				<h1>Faculty of Technology - SUSL</h1>
 			</div>
-			<div class="home-page-details">
-				<div class="row">
-					<div class="button-div col-lg-6">
-						<div class="home-page-buttons">
-							<a href=""><i class="fas fa-search"></i>Check</a>
-							<p>
-								Check inventory details on the system
-							</p>
+			<div id="home-page-sub-content">
+				<div class="home-page-title">
+					<h3>Inventory Management System</h3>
+				</div>
+				<div class="home-page-content-divider"></div>
+				<div class="home-page-details">
+					<div class="row">
+						<div class="button-div col-lg-6">
+							<div class="home-page-buttons" id="home-page-buttons-left">
+								<a href=""><i class="fas fa-search"></i>Check</a>
+								<p>
+									Check inventory details
+								</p>
+							</div>
 						</div>
-					</div>
-					<div class="button-div col-lg-6">
-						<div class="home-page-buttons">
-							<a href="inventory-form.php"><i class="fas fa-plus"></i>Add</a>
-							<p>
-								Add new inventory into the system
-							</p>
+						<div class="button-div col-lg-6">
+							<div class="home-page-buttons" id="home-page-buttons-right">
+								<a href="inventory-form.php"><i class="fas fa-plus"></i>Add</a>
+								<p>
+									Add new inventory
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
