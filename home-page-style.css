@@ -12,36 +12,59 @@ section{
 }
 #home-page-content{
 	height: 100vh;
-	background-color: rgba(0,0,0,0.6);
-	padding: 100px 0;
+	background-color: rgba(0,0,0,0.2);
+	padding-bottom: 100px;
+}
+#page-header{
+	text-align: center;
+	padding: 50px 0;
+	background-color: rgba(140, 12, 29);
+	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
+}
+#page-header h1{
+	color: #fff;
+	font-family: Roboto;
+	font-size: 50px;
+}
+#home-page-sub-content{
+	width: 55%;
+	margin: 0 auto;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+	/*background-image: linear-gradient(to bottom,rgba(0, 0, 0,1),rgba(0,0,0,0));*/
+	background: rgba(0,0,0,0.7);
+	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
 }
 .home-page-title{
 	text-align: center;
 	color: #fff;
 }
-.home-page-title h1{
-	font-family: Roboto;
-	font-size: 50px;
-	text-shadow: 5px 5px 10px #000;
-}
 .home-page-title h3{
-	margin-top: 30px;
+	padding-top: 30px;
 	text-shadow: 5px 5px 10px #000;
+	margin-bottom: 20px;
+}
+.home-page-content-divider{
+	width: 30%;
+	margin: 0 auto;
+	border-top: 3px solid #00acd3;
 }
 .home-page-details{
-	width: 55%;
+	width: 80%;
 	margin: 0 auto;
-	padding: 50px 0;
+	padding: 50px 0 70px 0;
 	color: #fff;
 }
 .button-div{
 	text-align: center;
 }
 .home-page-buttons{
-	width: 80%;
+	width: 100%;
 	margin: 0 auto;
-	padding: 80px 20px 50px 20px;
-	background-color: rgba(0,0,0,0.6);
+	padding: 70px 0px 20px 0px;
+	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
+	background-color: rgb(15, 64, 96);
+	/*background-image: linear-gradient(to top,rgba(15, 64, 96,1),rgba(15, 64, 96,0.2));*/
 	border-radius: 20px;
 }
 .home-page-buttons a{
@@ -61,12 +84,12 @@ section{
 	text-decoration: none;
 	color: #fff;
 	background-color: #00acd3;
+	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
 	border: 3px solid #fff;
 }
 .home-page-buttons p{
 	margin-top: 40px;
 	color: #bdbfc1;
-	text-shadow: 5px 5px 10px #000;
 }
 .fas{
 	padding-right: 10px;
