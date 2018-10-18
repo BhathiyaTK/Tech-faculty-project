@@ -112,11 +112,11 @@
 				<div class="form-row" id="quantity-form-row">
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
 				      	<legend for="inputZip">Item Price</legend>
-				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter price of single item..." name="quantity">
+				      	<input type="text" class="form-control" id="item_price" name="item_price" placeholder="Enter price of single item..." name="quantity">
 				    </div>
 				    <div class="form-group col-sm-12 col-md-4 col-lg-4 sub-form-row-left">
 				    	<legend for="inputZip">Quantity</legend>
-				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter Quantity..." name="quantity">
+				      	<input type="text" class="form-control" id="quantity" name="quantity" placeholder="Enter Quantity..." >
 				    </div>
 				</div>
 				<div class="form-divider-bottom"></div>
