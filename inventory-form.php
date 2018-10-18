@@ -32,7 +32,6 @@
 				        	<option value="physics">(C) Physics Lab</option>
 				        	<option value="chemistry">(D) Chemistry Lab</option>
 				        	<option value="bio">(E) Bio Lab</option>
-				        	<option value="all">(F) All</option>
 				      	</select>	
 				    </div>
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
@@ -61,7 +60,6 @@
 				        	<option value="PH-physics 1">(C.1) Physics Lab</option>
 				        	<option value="CH-chemistry 1">(D.1) Chemistry Lab</option>
 				        	<option value="BI-bio 1">(E.1) Bio Lab</option>
-				        	<option value="AL-all 1">(F.1) All</option>
 				      	</select>
 				    </div>
 				</div>
@@ -112,8 +110,12 @@
 				    </div>
 				</div>
 				<div class="form-row" id="quantity-form-row">
-				    <div class="form-group col-sm-12 col-md-4 col-lg-4">
-				      	<legend for="inputZip">Quantity</legend>
+				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
+				      	<legend for="inputZip">Item Price</legend>
+				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter price of single item..." name="quantity">
+				    </div>
+				    <div class="form-group col-sm-12 col-md-4 col-lg-4 sub-form-row-left">
+				    	<legend for="inputZip">Quantity</legend>
 				      	<input type="text" class="form-control" id="inputZip" placeholder="Enter Quantity..." name="quantity">
 				    </div>
 				</div>
