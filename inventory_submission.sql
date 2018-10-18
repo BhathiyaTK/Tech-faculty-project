@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Oct 17, 2018 at 05:52 PM
+-- Generation Time: Oct 18, 2018 at 05:11 PM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS `inventory_submission` (
   `Main Inventory Item` varchar(100) NOT NULL,
   `Code4` varchar(100) NOT NULL,
   `Sub Inventory Item` varchar(100) NOT NULL,
+  `Price` varchar(10000) NOT NULL,
   `Quantity` varchar(10000) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
