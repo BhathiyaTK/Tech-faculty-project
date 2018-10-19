@@ -26,7 +26,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if (($main_location!="")&&($sub_locations!="")) {
             $query_teams = "INSERT INTO inventory_submission(Main Location, Sub Location, Main Inventory Item, Sub Inventory Item, Price, Quantity) VALUES('$main_location','$sub_locations','$main_inventory_items','$sub_inventory_items','$item_price','$quantity')";
         }else{
-            
+        	$message = "Submission Failed! Please check the internet connection & Try again.";
+			echo "<script type='text/javascript'>alert('$message');</script>";
         }
     }
 }
