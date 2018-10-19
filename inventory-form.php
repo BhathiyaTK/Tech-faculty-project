@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		<script type="text/javascript">
 
 			$(function(){
-				var code1 = null,
+				var code1,
 					select_main_location = $('#main_location'),
 					option_main_location = select_main_location.find('option');
 
@@ -33,7 +33,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					else if (code1_val == "chemistry") {code1 = "D";}
 					else if (code1_val == "bio") {code1 = "E";}
 				});
-				alert(code1);
 			});
 			
 		</script>
