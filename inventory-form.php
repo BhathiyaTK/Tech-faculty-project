@@ -5,10 +5,30 @@ $db_name="root";
 $db_pass= "";
 $db="techfaculty_inventory";
 
+session_start();
+
 $conn = new mysqli($host,$db_name,$db_pass,$db);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    if (isset($_POST["submit"])) {
+        $main_location = $_POST["main_location"];
+        $sub_locations = $_POST["sub_locations"];
+        $main_inventory_items = $_POST["main_inventory_items"];
+        $sub_inventory_items = $_POST["sub_inventory_items"];
+        $item_price = $_POST["item_price"];
+        $quantity = $_POST["quantity"];
+
+
+        if (($main_location!="")&&($sub_locations!="")) {
+            $query_teams = "INSERT INTO inventory_submission(Main Location, Sub Location, Main Inventory Item, Sub Inventory Item, Price, Quantity) VALUES('$main_location','$sub_locations','$main_inventory_items','$sub_inventory_items','$item_price','$quantity')";
+        }else{
+            
+        }
+    }
 }
 
 ?>
@@ -135,7 +155,7 @@ if ($conn->connect_error) {
 				</div>
 				<div class="form-divider-bottom"></div>
 				<div id="submit-button-div">
-					<button type="submit" class="btn btn-success">Submit Inventory Data</button>
+					<button name="submit" id="submit-button" type="submit" class="btn btn-success">Submit Inventory Data</button>
 				</div>
 			</form>
 		</div>
