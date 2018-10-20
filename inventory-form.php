@@ -5,31 +5,38 @@ $db_name="root";
 $db_pass= "";
 $db="techfaculty_inventory";
 
-session_start();
-
 $conn = new mysqli($host,$db_name,$db_pass,$db);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+session_start();
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (isset($_POST["submit"])) {
 
-        $main_location = $_POST["main_location"];
-        $sub_locations = $_POST["sub_locations"];
-        $main_inventory_items = $_POST["main_inventory_items"];
-        $sub_inventory_items = $_POST["sub_inventory_items"];
+    	$code1 = $_POST["main_location"];
+        $code2 = $_POST["sub_locations"];
+        $code3 = $_POST["main_inventory_items"];
+        $code4 = $_POST["sub_inventory_items"];
         $item_price = $_POST["item_price"];
         $quantity = $_POST["quantity"];
 
 
-        if (($main_location!="")&&($sub_locations!="")) {
-            $query_inventory = "INSERT INTO inventory_submission(Main Location, Sub Location, Main Inventory Item, Sub Inventory Item, Price, Quantity) VALUES('$main_location','$sub_locations','$main_inventory_items','$sub_inventory_items','$item_price','$quantity')";
+        if (($item_price!="")&&($quantity!="")) {
+            $query_inventory = "INSERT INTO inventory_submission(Code1, Code2, Code3, Code4, Price, Quantity) VALUES('$code1','$code2','$code3','$code4','$item_price','$quantity')";
 
-           # echo "<script type='text/javascript'>alert('done');</script>";
+           	#echo "<script type='text/javascript'>alert('done');</script>";
+            if ($conn->query($query_inventory)) {
+            	$message = "Inventory submitted successfully.";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+            }else{
+            	$message = "Submission Failed! Please check the internet connection & Try again.";
+				echo "<script type='text/javascript'>alert('$message');</script>";
+            }
         }else{
-        	$message = "Submission Failed! Please check the internet connection & Try again.";
+        	$message = "Please fill all fields & Try again.";
 			echo "<script type='text/javascript'>alert('$message');</script>";
         }
     }
@@ -70,35 +77,51 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				        	<option value="C">(C) Physics Lab</option>
 				        	<option value="D">(D) Chemistry Lab</option>
 				        	<option value="E">(E) Bio Lab</option>
-				      	</select>	
+				      	</select>
+				      	<!--input type="hidden" name="main_location_name" id="main_location_hidden">
+				      	<script type="text/javascript">
+				      		$(document).ready(function() {
+							    $("#main_location").change(function(){
+							      	$("#main_location_hidden").val(("#main_location").find(":selected").text());
+							    });
+							});
+				      	</script-->	
 				    </div>
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 					    <legend for="inputState">Sub Location</legend>
 				      	<select id="sub_locations" class="form-control" name="sub_locations">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="A.01">(A.1) Department of Engineering Technology</option>
-				        	<option value="A.02">(A.2) Mr. Nalin's Room</option>
-				        	<option value="A.03">(A.3) Mr. Koswaththa's Room</option>
-				        	<option value="A.04">(A.4) Dasith's Room</option>
-				        	<option value="A.05">(A.5) Miss. Pabasara's Room</option>
-				        	<option value="A.06">(A.6) Mechanical Lecture's Room</option>
-				        	<option value="A.07">(A.7) Electrical Lecture's Room</option>
-				        	<option value="A.08">(A.8) Computer Lecture's Room</option>
-				        	<option value="A.09">(A.9) Computer Lab</option>
+				        	<option value="A.1">(A.1) Department of Engineering Technology</option>
+				        	<option value="A.2">(A.2) Mr. Nalin's Room</option>
+				        	<option value="A.3">(A.3) Mr. Koswaththa's Room</option>
+				        	<option value="A.4">(A.4) Dasith's Room</option>
+				        	<option value="A.5">(A.5) Miss. Pabasara's Room</option>
+				        	<option value="A.6">(A.6) Mechanical Lecture's Room</option>
+				        	<option value="A.7">(A.7) Electrical Lecture's Room</option>
+				        	<option value="A.8">(A.8) Computer Lecture's Room</option>
+				        	<option value="A.9">(A.9) Computer Lab</option>
 				        	<option value="A.10">(A.10) Dining Room</option>
 				        	<option value="A.11">(A.11) P.I.U(Project Implementation Unit</option>
 				        	<option value="A.12">(A.12) Corridors</option>
-				        	<option value="B.01">(B.1) Office of Dean</option>
-				        	<option value="B.02">(B.2) Sarath Room</option>
-				        	<option value="B.03">(B.3) Department of Bio System</option>
-				        	<option value="B.04">(B.4) Dean's Room</option>
-				        	<option value="B.05">(B.5) Sadun Office</option>
-				        	<option value="B.06">(B.6) Acedamic Registar Room</option>
-				        	<option value="B.07">(B.7) Corridor</option>
+				        	<option value="B.1">(B.1) Office of Dean</option>
+				        	<option value="B.2">(B.2) Sarath Room</option>
+				        	<option value="B.3">(B.3) Department of Bio System</option>
+				        	<option value="B.4">(B.4) Dean's Room</option>
+				        	<option value="B.5">(B.5) Sadun Office</option>
+				        	<option value="B.6">(B.6) Acedamic Registar Room</option>
+				        	<option value="B.7">(B.7) Corridor</option>
 				        	<option value="C.1">(C.1) Physics Lab</option>
 				        	<option value="D.1">(D.1) Chemistry Lab</option>
 				        	<option value="E.1">(E.1) Bio Lab</option>
 				      	</select>
+				      	<!--input type="hidden" name="sub_location_name" id="sub_location_hidden">
+				      	<script type="text/javascript">
+				      		$(document).ready(function() {
+							    $("#sub_locations").change(function(){
+							      	$("#sub_location_hidden").val(("#sub_locations").find(":selected").text());
+							    });
+							});
+				      	</script-->
 				    </div>
 				</div>
 				<div class="form-row">
@@ -106,44 +129,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					    <legend for="inputState">Main Inventory Item</legend>
 				      	<select id="main_inventory_items" class="form-control" name="main_inventory_items">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="chair">Chair </option>
-				        	<option value="table">Table </option>
-				        	<option value="drawer_cupborad_steel">Drawer Cupboard Steel </option>
-				        	<option value="book_rack">Book Rack </option>
-				        	<option value="computer">Computer </option>
-				        	<option value="steel_cupboard">Steel Cupboard </option>
-				        	<option value="photocopy_machine">Photocopy Machines </option>
-				        	<option value="project_sreen">Project & Screen </option>
-				        	<option value="network_cable">Network Cable </option>
-				        	<option value="fan">Fan</option>
+				        	<option value="CH">Chair </option>
+				        	<option value="TA">Table </option>
+				        	<option value="DCS">Drawer Cupboard Steel </option>
+				        	<option value="BR">Book Rack </option>
+				        	<option value="CO">Computer </option>
+				        	<option value="SC">Steel Cupboard </option>
+				        	<option value="PM">Photocopy Machines </option>
+				        	<option value="PS">Project & Screen </option>
+				        	<option value="NC">Network Cable </option>
+				        	<option value="FA">Fan</option>
 				      	</select>
 					</div>
 					<div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 				      	<legend for="inputState">Sub Inventory Item</legend>
 				      	<select id="sub_inventory_items" class="form-control" name="sub_inventory_items">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="CH-chair 01">Small Rotation Chair</option>
-				        	<option value="CH-chair 02">Main Chair(Room's)</option>
-				        	<option value="CH-chair 03">Visitor Chair</option>
-				        	<option value="CH-chair 04">Dining Table Chair</option>
-				        	<option value="CH-chair 05">Four Set Chair</option>
-				        	<option value="CH-chair 06">Lobby Chair</option>
-				        	<option value="TA-table 01">Computer Table</option>
-				        	<option value="TA-table 02">Wood Table big</option>
-				        	<option value="TA-table 03">Wood Table small</option>
-				        	<option value="TA-table 04">Steel Table</option>
-				        	<option value="TA-table 05">Board Room Table</option>
-				        	<option value="DR-drawer_cupborad_steel 01">N/A</option>
-				        	<option value="BO-book_rack 01">Big</option>
-				        	<option value="BO-book_rack 02">Small</option>
-				        	<option value="CO-computer 01">N/A</option>
-				        	<option value="ST-steel_cupboard 01">N/A</option>
-				        	<option value="PH-photocopy_machine 01">N/A</option>
-				        	<option value="PR-project_sreen 01">N/A</option>
-				        	<option value="NE-network_cable 01">N/A</option>
-				        	<option value="FA-fan 01">Ceeling Fan</option>
-				        	<option value="FA-fan 02">Wall Fan</option>
-				        	<option value="FA-fan 03">Stand Fan</option>
+				        	<option value="CH.1">Small Rotation Chair</option>
+				        	<option value="CH.2">Main Chair(Room's)</option>
+				        	<option value="CH.3">Visitor Chair</option>
+				        	<option value="CH.4">Dining Table Chair</option>
+				        	<option value="CH.5">Four Set Chair</option>
+				        	<option value="CH.6">Lobby Chair</option>
+				        	<option value="TA.1">Computer Table</option>
+				        	<option value="TA.2">Wood Table big</option>
+				        	<option value="TA.3">Wood Table small</option>
+				        	<option value="TA.4">Steel Table</option>
+				        	<option value="TA.5">Board Room Table</option>
+				        	<option value="DCS.1">N/A</option>
+				        	<option value="BR.1">Big</option>
+				        	<option value="BR.2">Small</option>
+				        	<option value="CO.1">N/A</option>
+				        	<option value="SC.1">N/A</option>
+				        	<option value="PM.1">N/A</option>
+				        	<option value="PS.1">N/A</option>
+				        	<option value="NC.1">N/A</option>
+				        	<option value="FA.1">Ceeling Fan</option>
+				        	<option value="FA.2">Wall Fan</option>
+				        	<option value="FA.3">Stand Fan</option>
 				      	</select>
 				    </div>
 				</div>
