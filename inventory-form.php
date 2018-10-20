@@ -16,28 +16,6 @@ if ($conn->connect_error) {
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     if (isset($_POST["submit"])) {
 
-?>
-		<script type="text/javascript">
-
-			$(function(){
-				var code1,
-					select_main_location = $('#main_location'),
-					option_main_location = select_main_location.find('option');
-
-				$(option_main_location).click(function(){
-					var code1_val = option_main_location.val();
-
-					if (code1_val == "old_building") {code1 = "A";}
-					else if(code1_val == "new_building") {code1 = "B";}
-					else if (code1_val == "physics") {code1 = "C";}
-					else if (code1_val == "chemistry") {code1 = "D";}
-					else if (code1_val == "bio") {code1 = "E";}
-				});
-			});
-			
-		</script>
-<?php
-
         $main_location = $_POST["main_location"];
         $sub_locations = $_POST["sub_locations"];
         $main_inventory_items = $_POST["main_inventory_items"];
@@ -47,7 +25,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
         if (($main_location!="")&&($sub_locations!="")) {
-            $query_teams = "INSERT INTO inventory_submission(Main Location, Sub Location, Main Inventory Item, Sub Inventory Item, Price, Quantity) VALUES('$main_location','$sub_locations','$main_inventory_items','$sub_inventory_items','$item_price','$quantity')";
+            $query_inventory = "INSERT INTO inventory_submission(Main Location, Sub Location, Main Inventory Item, Sub Inventory Item, Price, Quantity) VALUES('$main_location','$sub_locations','$main_inventory_items','$sub_inventory_items','$item_price','$quantity')";
+
+           # echo "<script type='text/javascript'>alert('done');</script>";
         }else{
         	$message = "Submission Failed! Please check the internet connection & Try again.";
 			echo "<script type='text/javascript'>alert('$message');</script>";
@@ -85,39 +65,39 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				    	<legend>Main Location</legend>
 				    	<select id="main_location" class="form-control" name="main_location">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="old_building">(A) Old Building</option>
-				        	<option value="new_building">(B) New Building</option>
-				        	<option value="physics">(C) Physics Lab</option>
-				        	<option value="chemistry">(D) Chemistry Lab</option>
-				        	<option value="bio">(E) Bio Lab</option>
+				        	<option value="A">(A) Old Building</option>
+				        	<option value="B">(B) New Building</option>
+				        	<option value="C">(C) Physics Lab</option>
+				        	<option value="D">(D) Chemistry Lab</option>
+				        	<option value="E">(E) Bio Lab</option>
 				      	</select>	
 				    </div>
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 					    <legend for="inputState">Sub Location</legend>
 				      	<select id="sub_locations" class="form-control" name="sub_locations">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="old_building 1">(A.1) Department of Engineering Technology</option>
-				        	<option value="OL-old_building 2">(A.2) Mr. Nalin's Room</option>
-				        	<option value="OL-old_building 3">(A.3) Mr. Koswaththa's Room</option>
-				        	<option value="OL-old_building 4">(A.4) Dasith's Room</option>
-				        	<option value="OL-old_building 5">(A.5) Miss. Pabasara's Room</option>
-				        	<option value="OL-old_building 6">(A.6) Mechanical Lecture's Room</option>
-				        	<option value="OL-old_building 7">(A.7) Electrical Lecture's Room</option>
-				        	<option value="OL-old_building 8">(A.8) Computer Lecture's Room</option>
-				        	<option value="OL-old_building 9">(A.9) Computer Lab</option>
-				        	<option value="OL-old_building 10">(A.10) Dining Room</option>
-				        	<option value="OL-old_building 11">(A.11) P.I.U(Project Implementation Unit</option>
-				        	<option value="OL-old_building 12">(A.12) Corridors</option>
-				        	<option value="NE-new_building 1">(B.1) Office of Dean</option>
-				        	<option value="NE-new_building 2">(B.2) Sarath Room</option>
-				        	<option value="NE-new_building 3">(B.3) Department of Bio System</option>
-				        	<option value="NE-new_building 4">(B.4) Dean's Room</option>
-				        	<option value="NE-new_building 5">(B.5) Sadun Office</option>
-				        	<option value="NE-new_building 6">(B.6) Acedamic Registar Room</option>
-				        	<option value="NE-new_building 7">(B.7) Corridor</option>
-				        	<option value="PH-physics 1">(C.1) Physics Lab</option>
-				        	<option value="CH-chemistry 1">(D.1) Chemistry Lab</option>
-				        	<option value="BI-bio 1">(E.1) Bio Lab</option>
+				        	<option value="A.01">(A.1) Department of Engineering Technology</option>
+				        	<option value="A.02">(A.2) Mr. Nalin's Room</option>
+				        	<option value="A.03">(A.3) Mr. Koswaththa's Room</option>
+				        	<option value="A.04">(A.4) Dasith's Room</option>
+				        	<option value="A.05">(A.5) Miss. Pabasara's Room</option>
+				        	<option value="A.06">(A.6) Mechanical Lecture's Room</option>
+				        	<option value="A.07">(A.7) Electrical Lecture's Room</option>
+				        	<option value="A.08">(A.8) Computer Lecture's Room</option>
+				        	<option value="A.09">(A.9) Computer Lab</option>
+				        	<option value="A.10">(A.10) Dining Room</option>
+				        	<option value="A.11">(A.11) P.I.U(Project Implementation Unit</option>
+				        	<option value="A.12">(A.12) Corridors</option>
+				        	<option value="B.01">(B.1) Office of Dean</option>
+				        	<option value="B.02">(B.2) Sarath Room</option>
+				        	<option value="B.03">(B.3) Department of Bio System</option>
+				        	<option value="B.04">(B.4) Dean's Room</option>
+				        	<option value="B.05">(B.5) Sadun Office</option>
+				        	<option value="B.06">(B.6) Acedamic Registar Room</option>
+				        	<option value="B.07">(B.7) Corridor</option>
+				        	<option value="C.1">(C.1) Physics Lab</option>
+				        	<option value="D.1">(D.1) Chemistry Lab</option>
+				        	<option value="E.1">(E.1) Bio Lab</option>
 				      	</select>
 				    </div>
 				</div>
@@ -126,44 +106,44 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					    <legend for="inputState">Main Inventory Item</legend>
 				      	<select id="main_inventory_items" class="form-control" name="main_inventory_items">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="chair">(A.1.1) Chair </option>
-				        	<option value="table">(A.1.2)Table </option>
-				        	<option value="drawer_cupborad_steel">(A.1.3) Drawer Cupboard Steel </option>
-				        	<option value="book_rack">(A.1.4) Book Rack </option>
-				        	<option value="computer">(A.1.5) Computer </option>
-				        	<option value="steel_cupboard">(A.1.6) Steel Cupboard </option>
-				        	<option value="photocopy_machine">(A.1.7) Photocopy Machines </option>
-				        	<option value="project_sreen">(A.1.8) Project & Screen </option>
-				        	<option value="network_cable">(A.1.9) Network Cable </option>
-				        	<option value="fan">(A.1.10) Fan</option>
+				        	<option value="chair">Chair </option>
+				        	<option value="table">Table </option>
+				        	<option value="drawer_cupborad_steel">Drawer Cupboard Steel </option>
+				        	<option value="book_rack">Book Rack </option>
+				        	<option value="computer">Computer </option>
+				        	<option value="steel_cupboard">Steel Cupboard </option>
+				        	<option value="photocopy_machine">Photocopy Machines </option>
+				        	<option value="project_sreen">Project & Screen </option>
+				        	<option value="network_cable">Network Cable </option>
+				        	<option value="fan">Fan</option>
 				      	</select>
 					</div>
 					<div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 				      	<legend for="inputState">Sub Inventory Item</legend>
 				      	<select id="sub_inventory_items" class="form-control" name="sub_inventory_items">
 				      		<option value="" selected>Choose...</option>
-				        	<option value="CH-chair 1">(A.1.1.1) Small Rotation Chair</option>
-				        	<option value="CH-chair 2">(A.1.1.2) Main Chair(Room's)</option>
-				        	<option value="CH-chair 3">(A.1.1.3) Visitor Chair</option>
-				        	<option value="CH-chair 4">(A.1.1.4) Dining Table Chair</option>
-				        	<option value="CH-chair 5">(A.1.1.5) Four Set Chair</option>
-				        	<option value="CH-chair 6">(A.1.1.6) Lobby Chair</option>
-				        	<option value="TA-table 1">(A.1.2.1) Computer Table</option>
-				        	<option value="TA-table 2">(A.1.2.2) Wood Table big</option>
-				        	<option value="TA-table 3">(A.1.2.3) Wood Table small</option>
-				        	<option value="TA-table 4">(A.1.2.4) Steel Table</option>
-				        	<option value="TA-table 5">(A.1.2.5) Board Room Table</option>
-				        	<option value="DR-drawer_cupborad_steel 1">N/A</option>
-				        	<option value="BO-book_rack 1">(A.1.4.1) Big</option>
-				        	<option value="BO-book_rack 2">(A.1.4.2) Small</option>
-				        	<option value="CO-computer 1">N/A</option>
-				        	<option value="ST-steel_cupboard 1">N/A</option>
-				        	<option value="PH-photocopy_machine 1">N/A</option>
-				        	<option value="PR-project_sreen 1">N/A</option>
-				        	<option value="NE-network_cable 1">N/A</option>
-				        	<option value="FA-fan 1">(A.1.10.1) Ceeling Fan</option>
-				        	<option value="FA-fan 2">(A.1.10.2) Wall Fan</option>
-				        	<option value="FA-fan 3">(A.1.10.3) Stand Fan</option>
+				        	<option value="CH-chair 01">Small Rotation Chair</option>
+				        	<option value="CH-chair 02">Main Chair(Room's)</option>
+				        	<option value="CH-chair 03">Visitor Chair</option>
+				        	<option value="CH-chair 04">Dining Table Chair</option>
+				        	<option value="CH-chair 05">Four Set Chair</option>
+				        	<option value="CH-chair 06">Lobby Chair</option>
+				        	<option value="TA-table 01">Computer Table</option>
+				        	<option value="TA-table 02">Wood Table big</option>
+				        	<option value="TA-table 03">Wood Table small</option>
+				        	<option value="TA-table 04">Steel Table</option>
+				        	<option value="TA-table 05">Board Room Table</option>
+				        	<option value="DR-drawer_cupborad_steel 01">N/A</option>
+				        	<option value="BO-book_rack 01">Big</option>
+				        	<option value="BO-book_rack 02">Small</option>
+				        	<option value="CO-computer 01">N/A</option>
+				        	<option value="ST-steel_cupboard 01">N/A</option>
+				        	<option value="PH-photocopy_machine 01">N/A</option>
+				        	<option value="PR-project_sreen 01">N/A</option>
+				        	<option value="NE-network_cable 01">N/A</option>
+				        	<option value="FA-fan 01">Ceeling Fan</option>
+				        	<option value="FA-fan 02">Wall Fan</option>
+				        	<option value="FA-fan 03">Stand Fan</option>
 				      	</select>
 				    </div>
 				</div>
