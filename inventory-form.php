@@ -200,6 +200,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             		sub_locations: "required",
             		main_inventory_items: "required",
             		sub_inventory_items: "required",
+            		item_price: "required",
             		quantity: "required"
             	},
         		messages: {
@@ -207,6 +208,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			      	sub_locations: "Please select sub location",
 			      	main_inventory_items: "Please select main inventory item",
 			      	sub_inventory_items: "Please select sub inventory item",
+			      	item_price: "Please enter item price"
 			      	quantity: "Please enter item quantity"
 			    },
 
