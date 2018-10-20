@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
         if (($item_price!="")&&($quantity!="")) {
-            $query_inventory = "INSERT INTO inventory_submission(Code1, Code2, Code3, Code4, Price, Quantity) VALUES('$code1','$code2','$code3','$code4','$item_price','$quantity')";
+            $query_inventory = "INSERT INTO inventory_submission(Code1,Code2,Code3,Code4,Price,Quantity) VALUES('$code1','$code2','$code3','$code4','$item_price','$quantity')";
 
            	#echo "<script type='text/javascript'>alert('done');</script>";
             if ($conn->query($query_inventory)) {
