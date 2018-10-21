@@ -35,9 +35,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             	$message = "Submission Failed! Please check the internet connection & Try again.";
 				echo "<script type='text/javascript'>alert('$message');</script>";
             }
-        }else{
-        	$message = "Please fill all fields & Try again.";
-			echo "<script type='text/javascript'>alert('$message');</script>";
         }
     }
 }
@@ -71,57 +68,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
 				    	<legend>Main Location</legend>
 				    	<select id="main_location" class="form-control" name="main_location">
-				      		<option value="" selected>Choose...</option>
-				        	<option value="A">(A) Old Building</option>
-				        	<option value="B">(B) New Building</option>
-				        	<option value="C">(C) Physics Lab</option>
-				        	<option value="D">(D) Chemistry Lab</option>
-				        	<option value="E">(E) Bio Lab</option>
-				      	</select>
-				      	<!--input type="hidden" name="main_location_name" id="main_location_hidden">
-				      	<script type="text/javascript">
-				      		$(document).ready(function() {
-							    $("#main_location").change(function(){
-							      	$("#main_location_hidden").val(("#main_location").find(":selected").text());
-							    });
-							});
-				      	</script-->	
+				    		<?php
+
+				    		$sql_main_loations = "SELECT * FROM main_locations";
+				    		$main_loc_results = mysqli_query($conn,$sql_main_loations);
+
+				    		while ($row = mysqli_fetch_array($main_loc_results)) {
+				    			echo "<option value=".$row['main_val'].">".$row['main_location']."</option>";
+				    		}
+
+				    		?>
+				      	</select>	
 				    </div>
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 					    <legend for="inputState">Sub Location</legend>
 				      	<select id="sub_locations" class="form-control" name="sub_locations">
-				      		<option value="" selected>Choose...</option>
-				        	<option value="A.1">(A.1) Department of Engineering Technology</option>
-				        	<option value="A.2">(A.2) Mr. Nalin's Room</option>
-				        	<option value="A.3">(A.3) Mr. Koswaththa's Room</option>
-				        	<option value="A.4">(A.4) Dasith's Room</option>
-				        	<option value="A.5">(A.5) Miss. Pabasara's Room</option>
-				        	<option value="A.6">(A.6) Mechanical Lecture's Room</option>
-				        	<option value="A.7">(A.7) Electrical Lecture's Room</option>
-				        	<option value="A.8">(A.8) Computer Lecture's Room</option>
-				        	<option value="A.9">(A.9) Computer Lab</option>
-				        	<option value="A.10">(A.10) Dining Room</option>
-				        	<option value="A.11">(A.11) P.I.U(Project Implementation Unit</option>
-				        	<option value="A.12">(A.12) Corridors</option>
-				        	<option value="B.1">(B.1) Office of Dean</option>
-				        	<option value="B.2">(B.2) Sarath Room</option>
-				        	<option value="B.3">(B.3) Department of Bio System</option>
-				        	<option value="B.4">(B.4) Dean's Room</option>
-				        	<option value="B.5">(B.5) Sadun Office</option>
-				        	<option value="B.6">(B.6) Acedamic Registar Room</option>
-				        	<option value="B.7">(B.7) Corridor</option>
-				        	<option value="C.1">(C.1) Physics Lab</option>
-				        	<option value="D.1">(D.1) Chemistry Lab</option>
-				        	<option value="E.1">(E.1) Bio Lab</option>
+				      		<?php
+
+				    		$sql_sub_loations = "SELECT * FROM sub_locations";
+				    		$sub_loc_results = mysqli_query($conn,$sql_sub_loations);
+
+				    		while ($row = mysqli_fetch_array($sub_loc_results)) {
+				    			echo "<option value=".$row['sub_val'].">".$row['sub_location']."</option>";
+				    		}
+
+				    		?>
 				      	</select>
-				      	<!--input type="hidden" name="sub_location_name" id="sub_location_hidden">
-				      	<script type="text/javascript">
-				      		$(document).ready(function() {
-							    $("#sub_locations").change(function(){
-							      	$("#sub_location_hidden").val(("#sub_locations").find(":selected").text());
-							    });
-							});
-				      	</script-->
 				    </div>
 				</div>
 				<div class="form-row">
@@ -208,7 +180,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			      	sub_locations: "Please select sub location",
 			      	main_inventory_items: "Please select main inventory item",
 			      	sub_inventory_items: "Please select sub inventory item",
-			      	item_price: "Please enter item price"
+			      	item_price: "Please enter item price",
 			      	quantity: "Please enter item quantity"
 			    },
 
