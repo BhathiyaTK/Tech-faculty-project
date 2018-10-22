@@ -18,8 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     	$code1 = $_POST["main_location"];
         $code2 = $_POST["sub_locations"];
-        $code3 = $_POST["main_inventory_items"];
-        $code4 = $_POST["sub_inventory_items"];
+        $code3 = $_POST["sub_locations"].".".$_POST["main_inventory_items"];
+        $code4 = $_POST["sub_locations"].".".$_POST["main_inventory_items"].".".$_POST["sub_inventory_items"];
         $item_price = $_POST["item_price"];
         $quantity = $_POST["quantity"];
 
@@ -30,7 +30,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
            	#echo "<script type='text/javascript'>alert('done');</script>";
             if ($conn->query($query_inventory)) {
             	$message = "Inventory submitted successfully.";
-				echo "<script type='text/javascript'>alert('$message');</script>";
             }else{
             	$message = "Submission Failed! Please check the internet connection & Try again.";
 				echo "<script type='text/javascript'>alert('$message');</script>";
