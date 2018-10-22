@@ -68,6 +68,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
 				    	<legend>Main Location</legend>
 				    	<select id="main_location" class="form-control" name="main_location">
+				    		<option value="">Choose...</option>
 				    		<?php
 
 				    		$sql_main_loations = "SELECT * FROM main_locations";
@@ -83,6 +84,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 					    <legend for="inputState">Sub Location</legend>
 				      	<select id="sub_locations" class="form-control" name="sub_locations">
+				      		<option value="">Choose...</option>
 				      		<?php
 
 				    		$sql_sub_loations = "SELECT * FROM sub_locations";
@@ -100,45 +102,93 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					<div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
 					    <legend for="inputState">Main Inventory Item</legend>
 				      	<select id="main_inventory_items" class="form-control" name="main_inventory_items">
-				      		<option value="" selected>Choose...</option>
-				        	<option value="CH">Chair </option>
-				        	<option value="TA">Table </option>
-				        	<option value="DCS">Drawer Cupboard Steel </option>
-				        	<option value="BR">Book Rack </option>
-				        	<option value="CO">Computer </option>
-				        	<option value="SC">Steel Cupboard </option>
-				        	<option value="PM">Photocopy Machines </option>
-				        	<option value="PS">Project & Screen </option>
-				        	<option value="NC">Network Cable </option>
-				        	<option value="FA">Fan</option>
+				      		<option value="">Choose...</option>
+				      		<?php
+
+				    		$sql_main_inventory = "SELECT * FROM main_inventory_item";
+				    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
+
+				    		while ($row = mysqli_fetch_array($main_inv_results)) {
+				    			echo "<option value=".$row['main_inventory_val'].">".$row['main_inventory_item']."</option>";
+				    		}
+
+				    		?>
 				      	</select>
 					</div>
 					<div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row-left">
 				      	<legend for="inputState">Sub Inventory Item</legend>
 				      	<select id="sub_inventory_items" class="form-control" name="sub_inventory_items">
-				      		<option value="" selected>Choose...</option>
-				        	<option value="CH.1">Small Rotation Chair</option>
-				        	<option value="CH.2">Main Chair(Room's)</option>
-				        	<option value="CH.3">Visitor Chair</option>
-				        	<option value="CH.4">Dining Table Chair</option>
-				        	<option value="CH.5">Four Set Chair</option>
-				        	<option value="CH.6">Lobby Chair</option>
-				        	<option value="TA.1">Computer Table</option>
-				        	<option value="TA.2">Wood Table big</option>
-				        	<option value="TA.3">Wood Table small</option>
-				        	<option value="TA.4">Steel Table</option>
-				        	<option value="TA.5">Board Room Table</option>
-				        	<option value="DCS.1">N/A</option>
-				        	<option value="BR.1">Big</option>
-				        	<option value="BR.2">Small</option>
-				        	<option value="CO.1">N/A</option>
-				        	<option value="SC.1">N/A</option>
-				        	<option value="PM.1">N/A</option>
-				        	<option value="PS.1">N/A</option>
-				        	<option value="NC.1">N/A</option>
-				        	<option value="FA.1">Ceeling Fan</option>
-				        	<option value="FA.2">Wall Fan</option>
-				        	<option value="FA.3">Stand Fan</option>
+				      		<option value="">Choose...</option>
+				      		<!--script type="text/javascript">
+				      			$(document).ready(function(){
+				      				$("#main_inventory_items").change(function(){
+				      					var inventoryVal = $("#main_inventory_items option:selected");
+				      					$.ajax({
+				      						type: "POST",
+				      						url: "inventory-form.php",
+				      						data: { main_inventory : inventoryVal }
+				      					}).done(function(data){
+				      						$("#sub_inventory_items option").html(data);
+				      					});
+				      				});
+				      			});
+				      		</script-->
+				      		<?php
+
+				      			$sql_chair = "SELECT * FROM chair";
+				      			$sql_tables = "SELECT * FROM tables";
+				      			$sql_dc_steel = "SELECT * FROM drawer_cupboard_steel";
+				      			$sql_wbook_rack = "SELECT * FROM wood_book_rack";
+				      			$sql_computer = "SELECT * FROM computer";
+				      			$sql_steel_cupboard = "SELECT * FROM steel_cupboard";
+				      			$sql_pmachine = "SELECT * FROM photocopy_machine";
+				      			$sql_proscreen = "SELECT * FROM projector_screen";
+				      			$sql_netcable = "SELECT * FROM network_cable";
+				      			$sql_fan = "SELECT * FROM fan";
+
+					    		$chair_results = mysqli_query($conn,$sql_chair);
+					    		while ($row = mysqli_fetch_array($chair_results)) {
+					    			echo "<option value=".$row['chair_val'].">".$row['chair_name']."</option>";
+					    		}
+					    		$tables_results = mysqli_query($conn,$sql_tables);
+					    		while ($row = mysqli_fetch_array($tables_results)) {
+					    			echo "<option value=".$row['tables_val'].">".$row['tables_name']."</option>";
+					    		}
+					    		$dc_steel_results = mysqli_query($conn,$sql_dc_steel);
+					    		while ($row = mysqli_fetch_array($dc_steel_results)) {
+					    			echo "<option value=".$row['dcupboard_val'].">".$row['dcupboard_name']."</option>";
+					    		}
+					    		$wbook_rack_results = mysqli_query($conn,$sql_wbook_rack);
+					    		while ($row = mysqli_fetch_array($wbook_rack_results)) {
+					    			echo "<option value=".$row['wbook_rack_val'].">".$row['wbook_rack_name']."</option>";
+					    		}
+					    		$computer_results = mysqli_query($conn,$sql_computer);
+					    		while ($row = mysqli_fetch_array($computer_results)) {
+					    			echo "<option value=".$row['computer_val'].">".$row['computer_name']."</option>";
+					    		}
+					    		$scupboard_results = mysqli_query($conn,$sql_steel_cupboard);
+					    		while ($row = mysqli_fetch_array($scupboard_results)) {
+					    			echo "<option value=".$row['scupboard_val'].">".$row['scupboard_name']."</option>";
+					    		}
+					    		$pmachine_results = mysqli_query($conn,$sql_pmachine);
+					    		while ($row = mysqli_fetch_array($pmachine_results)) {
+					    			echo "<option value=".$row['pmachine_val'].">".$row['pmachine_name']."</option>";
+					    		}
+					    		$pscreen_results = mysqli_query($conn,$sql_pscreen);
+					    		while ($row = mysqli_fetch_array($pscreen_results)) {
+					    			echo "<option value=".$row['pscreen_val'].">".$row['pscreen_name']."</option>";
+					    		}
+					    		$netcable_results = mysqli_query($conn,$sql_netcable);
+					    		while ($row = mysqli_fetch_array($netcable_results)) {
+					    			echo "<option value=".$row['ncable_val'].">".$row['ncable_name']."</option>";
+					    		}
+					    		$fan_results = mysqli_query($conn,$sql_fan);
+					    		while ($row = mysqli_fetch_array($fan_results)) {
+					    			echo "<option value=".$row['fan_val'].">".$row['fan_name']."</option>";
+					    		}
+				      			//$main_inventory = mysqli_real_escape_string($conn, $_POST['main_inventory']);
+				      			
+				      		?>
 				      	</select>
 				    </div>
 				</div>
@@ -205,11 +255,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		    var select = $('#main_location'),
 		    	options = select.find('option'),
 		    	select0 = $('#sub_locations'),
-		        options0 = select0.find('option'),
-		        select1 = $('#main_inventory_items'),
+		        options0 = select0.find('option');
+		        /*select1 = $('#main_inventory_items'),
 		        options1 = select1.find('option'),
 		        select2 = $('#sub_inventory_items'),
-		        options2 = select2.find('option');
+		        options2 = select2.find('option');*/
 		    
 		    $(options).click(function(){
 		        var visibleItems = options0.filter('[value*="' + $(this).val()  + '"]').show();
@@ -220,7 +270,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		            select0.val(visibleItems.eq(0).val());
 		        }
 		    });
-		    $(options1).click(function(){
+		    /*$(options1).click(function(){
 		    	var visibleItems1 = options2.filter('[value*="' + $(this).val() + '"]').show();
 		    	options2.not(visibleItems1).hide();
 
@@ -228,7 +278,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		    	{
 		    		select2.val(visibleItems1.eq(0).val());
 		    	}
-		    });
+		    });*/
 		});
 	</script>
 </body>
