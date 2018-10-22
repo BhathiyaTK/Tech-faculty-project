@@ -256,10 +256,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		    	options = select.find('option'),
 		    	select0 = $('#sub_locations'),
 		        options0 = select0.find('option');
-		        /*select1 = $('#main_inventory_items'),
-		        options1 = select1.find('option'),
-		        select2 = $('#sub_inventory_items'),
-		        options2 = select2.find('option');*/
 		    
 		    $(options).click(function(){
 		        var visibleItems = options0.filter('[value*="' + $(this).val()  + '"]').show();
@@ -270,15 +266,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		            select0.val(visibleItems.eq(0).val());
 		        }
 		    });
-		    /*$(options1).click(function(){
-		    	var visibleItems1 = options2.filter('[value*="' + $(this).val() + '"]').show();
-		    	options2.not(visibleItems1).hide();
-
-		    	if (visibleItems1.length > 0) 
-		    	{
-		    		select2.val(visibleItems1.eq(0).val());
-		    	}
-		    });*/
 		});
 	</script>
 </body>
