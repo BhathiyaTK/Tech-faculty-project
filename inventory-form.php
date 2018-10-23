@@ -50,6 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 	<script type="text/javascript" src="inventory-form-functions.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
@@ -118,20 +119,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				      	<legend for="inputState">Sub Inventory Item</legend>
 				      	<select id="sub_inventory_items" class="form-control" name="sub_inventory_items">
 				      		<option value="">Choose...</option>
-				      		<!--script type="text/javascript">
-				      			$(document).ready(function(){
-				      				$("#main_inventory_items").change(function(){
-				      					var inventoryVal = $("#main_inventory_items option:selected");
-				      					$.ajax({
-				      						type: "POST",
-				      						url: "inventory-form.php",
-				      						data: { main_inventory : inventoryVal }
-				      					}).done(function(data){
-				      						$("#sub_inventory_items option").html(data);
-				      					});
-				      				});
-				      			});
-				      		</script-->
+				      		<option value="N/A">N/A</option>
 				      		<?php
 
 				      			$sql_chair = "SELECT * FROM chair";
@@ -215,6 +203,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<script type="text/javascript">
 
 		$(document).ready(function(){
+			/*function changeType(){
+				var main_inventory_id = $("#main_inventory_items").val();
+				$.ajax({
+					url:"fetch_sub.php",
+					data:{mainId:main_inventory_id},
+					dataType:"text",
+					success:function(data)
+					{
+						$('#sub_inventory_items').html(data);
+					}
+				});
+			}*/
 			$("#inventory_form").validate({
             	rules: {
             		main_location: "required",
@@ -255,6 +255,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		    	options = select.find('option'),
 		    	select0 = $('#sub_locations'),
 		        options0 = select0.find('option');
+		        /*select1 = $('#main_inventory_items'),
+		        options1 = select1.find('option'),
+		        select2 = $('#sub_inventory_items'),
+		        options2 = select2.find('option');*/
 		    
 		    $(options).click(function(){
 		        var visibleItems = options0.filter('[value*="' + $(this).val()  + '"]').show();
@@ -265,6 +269,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		            select0.val(visibleItems.eq(0).val());
 		        }
 		    });
+		    /*$(options1).click(function(){
+		    	var visibleItems1 = options2.filter('[value*="' + $(this).val() + '"]').show();
+		    	options2.not(visibleItems1).hide();
+
+		    	if (visibleItems1.length > 0) 
+		    	{
+		    		select2.val(visibleItems1.eq(0).val());
+		    	}
+		    });*/
 		});
 	</script>
 </body>
