@@ -27,17 +27,25 @@
 				<div class="home-page-content-divider"></div>
 				<div class="home-page-details">
 					<div class="row">
-						<div class="button-div col-lg-6">
+						<div class="button-div col-lg-4">
 							<div class="home-page-buttons" id="home-page-buttons-left">
-								<a href=""><i class="fas fa-search"></i>Check</a>
+								<a href="check-inventory.php"><i class="fas fa-search"></i>Check</a>
 								<p>
 									Check inventory details
 								</p>
 							</div>
 						</div>
-						<div class="button-div col-lg-6">
+						<div class="button-div col-lg-4">
+							<div class="home-page-buttons" id="home-page-buttons-center">
+								<a href="inventory-form.php"><i class="fas fa-share-square"></i>Add</a>
+								<p>
+									Submit existing inventory
+								</p>
+							</div>
+						</div>
+						<div class="button-div col-lg-4">
 							<div class="home-page-buttons" id="home-page-buttons-right">
-								<a href="inventory-form.php"><i class="fas fa-plus"></i>Add</a>
+								<a href="add-inventory.php"><i class="fas fa-plus"></i>New</a>
 								<p>
 									Add new inventory
 								</p>
