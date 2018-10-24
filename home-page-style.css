@@ -27,7 +27,7 @@ section{
 	font-size: 50px;
 }
 #home-page-sub-content{
-	width: 55%;
+	width: 85%;
 	margin: 0 auto;
 	border-bottom-left-radius: 50px;
 	border-bottom-right-radius: 50px;
@@ -63,9 +63,17 @@ section{
 	margin: 0 auto;
 	padding: 70px 0px 20px 0px;
 	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
-	background-color: rgb(15, 64, 96);
 	/*background-image: linear-gradient(to top,rgba(15, 64, 96,1),rgba(15, 64, 96,0.2));*/
 	border-radius: 20px;
+}
+#home-page-buttons-left{
+	background-color: rgb(15, 64, 96);
+}
+#home-page-buttons-center{
+	background-color: rgb(12, 124, 23);
+}
+#home-page-buttons-right{
+	background-color: rgb(146, 14, 153);
 }
 .home-page-buttons a{
 	text-decoration: none;
