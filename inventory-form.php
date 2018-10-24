@@ -49,12 +49,80 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 	<script type="text/javascript" src="inventory-form-functions.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 	<title>Inventory Submission</title>
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			$('#main_inventory_items option').click(function(){
+				var main_inventory_id = $("#main_inventory_items").val();
+				$.post(
+					"fetch_sub.php",
+					{mainId:main_inventory_id},
+					function(data)
+					{
+						$('#sub_inventory_items').html(data);
+					}
+				);
+			});
+			$("#inventory_form").validate({
+            	rules: {
+            		main_location: "required",
+            		sub_locations: "required",
+            		main_inventory_items: "required",
+            		sub_inventory_items: "required",
+            		item_price: "required",
+            		quantity: "required"
+            	},
+        		messages: {
+        			main_location: "Please select main lacation",
+			      	sub_locations: "Please select sub location",
+			      	main_inventory_items: "Please select main inventory item",
+			      	sub_inventory_items: "Please select sub inventory item",
+			      	item_price: "Please enter item price",
+			      	quantity: "Please enter item quantity"
+			    },
+
+			    submitHandler: function(form) {
+			      	form.submit();
+			    }
+            });
+            $("#quantity").keydown(function (e) {
+		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+		            (e.keyCode >= 35 && e.keyCode <= 40)) {
+		                 return;
+		        }
+		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+		            e.preventDefault();
+		        }
+		    });
+		});
+
+		$(function(){
+    
+		    var select = $('#main_location'),
+		    	options = select.find('option'),
+		    	select0 = $('#sub_locations'),
+		        options0 = select0.find('option');
+		    
+		    $(options).click(function(){
+		        var visibleItems = options0.filter('[value*="' + $(this).val()  + '"]').show();
+		        options0.not(visibleItems).hide();
+		        
+		        if(visibleItems.length > 0)
+		        {
+		            select0.val(visibleItems.eq(0).val());
+		        }
+		    });
+		});
+	</script>
 </head>
 <body>
 	<section>
@@ -119,77 +187,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				      	<legend for="inputState">Sub Inventory Item</legend>
 				      	<select id="sub_inventory_items" class="form-control" name="sub_inventory_items">
 				      		<option value="">Choose...</option>
-				      		<option value="N/A">N/A</option>
-				      		<?php
-
-				      			/*$sql_main_inventory = "SELECT * FROM main_inventory_item";
-				      			$sub_loc_results = mysqli_query($conn,$sql_sub_loations);
-				      			$row_sub = mysqli_fetch_assoc($sub_loc_results);
-
-				      			$sub_inventory = $_POST["mainId"];
-
-				      			if ($sub_inventory=="1") {
-				      				$sql = "SELECT * FROM chair";
-				      				$sql_results = mysqli_query($conn,$sql);
-				      				while ($row = mysqli_fetch_array($sql_results)) {
-				      					echo "<option value=".$row['chair_val'].">".$row['chair_name']."</option>";
-				      				}
-				      			}*/
-
-				      			$sql_chair = "SELECT * FROM chair";
-				      			$sql_tables = "SELECT * FROM tables";
-				      			$sql_dc_steel = "SELECT * FROM drawer_cupboard_steel";
-				      			$sql_wbook_rack = "SELECT * FROM wood_book_rack";
-				      			$sql_computer = "SELECT * FROM computer";
-				      			$sql_steel_cupboard = "SELECT * FROM steel_cupboard";
-				      			$sql_pmachine = "SELECT * FROM photocopy_machine";
-				      			$sql_proscreen = "SELECT * FROM projector_screen";
-				      			$sql_netcable = "SELECT * FROM network_cable";
-				      			$sql_fan = "SELECT * FROM fan";
-
-					    		$chair_results = mysqli_query($conn,$sql_chair);
-					    		while ($row = mysqli_fetch_array($chair_results)) {
-					    			echo "<option value=".$row['chair_val'].">".$row['chair_name']."</option>";
-					    		}
-					    		$tables_results = mysqli_query($conn,$sql_tables);
-					    		while ($row = mysqli_fetch_array($tables_results)) {
-					    			echo "<option value=".$row['tables_val'].">".$row['tables_name']."</option>";
-					    		}
-					    		$dc_steel_results = mysqli_query($conn,$sql_dc_steel);
-					    		while ($row = mysqli_fetch_array($dc_steel_results)) {
-					    			echo "<option value=".$row['dcupboard_val'].">".$row['dcupboard_name']."</option>";
-					    		}
-					    		$wbook_rack_results = mysqli_query($conn,$sql_wbook_rack);
-					    		while ($row = mysqli_fetch_array($wbook_rack_results)) {
-					    			echo "<option value=".$row['wbook_rack_val'].">".$row['wbook_rack_name']."</option>";
-					    		}
-					    		$computer_results = mysqli_query($conn,$sql_computer);
-					    		while ($row = mysqli_fetch_array($computer_results)) {
-					    			echo "<option value=".$row['computer_val'].">".$row['computer_name']."</option>";
-					    		}
-					    		$scupboard_results = mysqli_query($conn,$sql_steel_cupboard);
-					    		while ($row = mysqli_fetch_array($scupboard_results)) {
-					    			echo "<option value=".$row['scupboard_val'].">".$row['scupboard_name']."</option>";
-					    		}
-					    		$pmachine_results = mysqli_query($conn,$sql_pmachine);
-					    		while ($row = mysqli_fetch_array($pmachine_results)) {
-					    			echo "<option value=".$row['pmachine_val'].">".$row['pmachine_name']."</option>";
-					    		}
-					    		$pscreen_results = mysqli_query($conn,$sql_pscreen);
-					    		while ($row = mysqli_fetch_array($pscreen_results)) {
-					    			echo "<option value=".$row['pscreen_val'].">".$row['pscreen_name']."</option>";
-					    		}
-					    		$netcable_results = mysqli_query($conn,$sql_netcable);
-					    		while ($row = mysqli_fetch_array($netcable_results)) {
-					    			echo "<option value=".$row['ncable_val'].">".$row['ncable_name']."</option>";
-					    		}
-					    		$fan_results = mysqli_query($conn,$sql_fan);
-					    		while ($row = mysqli_fetch_array($fan_results)) {
-					    			echo "<option value=".$row['fan_val'].">".$row['fan_name']."</option>";
-					    		}
-				      			//$main_inventory = mysqli_real_escape_string($conn, $_POST['main_inventory']);
-				      			
-				      		?>
 				      	</select>
 				    </div>
 				</div>
@@ -205,81 +202,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				</div>
 				<div class="form-divider-bottom"></div>
 				<div id="submit-button-div">
-					<button name="submit" id="submit-button" type="submit" class="btn btn-success">Submit Inventory Data</button>
+					<button name="submit" id="submit-button" type="submit" class="btn btn-success">Submit Data<i class="fab fa-telegram-plane"></i></button>
 				</div>
 			</form>
 		</div>
 		<div id="back-to-home-button">
 			<a class="btn btn-danger" href="home.php">Back to Home</a>
+			<a id="plus-new-item-button" class="btn btn-warning" href="add-inventory.php"><i class="fas fa-plus"></i>New Inventory</a>
 		</div>
 	</section>
 
-	<script type="text/javascript">
-
-		$(document).ready(function(){
-			$('#main_inventory_items').on('change',function(){
-				var main_inventory_id = $("#main_inventory_items").val();
-				$.ajax({
-					url:"inventory-form.php",
-					data:{mainId:main_inventory_id},
-					dataType:"text",
-					success:function(data)
-					{
-						$('#sub_inventory_items').html(data);
-					}
-				});
-			});
-			$("#inventory_form").validate({
-            	rules: {
-            		main_location: "required",
-            		sub_locations: "required",
-            		main_inventory_items: "required",
-            		sub_inventory_items: "required",
-            		item_price: "required",
-            		quantity: "required"
-            	},
-        		messages: {
-        			main_location: "Please select main lacation",
-			      	sub_locations: "Please select sub location",
-			      	main_inventory_items: "Please select main inventory item",
-			      	sub_inventory_items: "Please select sub inventory item",
-			      	item_price: "Please enter item price",
-			      	quantity: "Please enter item quantity"
-			    },
-
-			    submitHandler: function(form) {
-			      	form.submit();
-			    }
-            });
-            $("#quantity").keydown(function (e) {
-		        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
-		            (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-		            (e.keyCode >= 35 && e.keyCode <= 40)) {
-		                 return;
-		        }
-		        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		            e.preventDefault();
-		        }
-		    });
-		});
-
-		$(function(){
-    
-		    var select = $('#main_location'),
-		    	options = select.find('option'),
-		    	select0 = $('#sub_locations'),
-		        options0 = select0.find('option');
-		    
-		    $(options).click(function(){
-		        var visibleItems = options0.filter('[value*="' + $(this).val()  + '"]').show();
-		        options0.not(visibleItems).hide();
-		        
-		        if(visibleItems.length > 0)
-		        {
-		            select0.val(visibleItems.eq(0).val());
-		        }
-		    });
-		});
-	</script>
+	
 </body>
 </html>
