@@ -122,6 +122,20 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				      		<option value="N/A">N/A</option>
 				      		<?php
 
+				      			/*$sql_main_inventory = "SELECT * FROM main_inventory_item";
+				      			$sub_loc_results = mysqli_query($conn,$sql_sub_loations);
+				      			$row_sub = mysqli_fetch_assoc($sub_loc_results);
+
+				      			$sub_inventory = $_POST["mainId"];
+
+				      			if ($sub_inventory=="1") {
+				      				$sql = "SELECT * FROM chair";
+				      				$sql_results = mysqli_query($conn,$sql);
+				      				while ($row = mysqli_fetch_array($sql_results)) {
+				      					echo "<option value=".$row['chair_val'].">".$row['chair_name']."</option>";
+				      				}
+				      			}*/
+
 				      			$sql_chair = "SELECT * FROM chair";
 				      			$sql_tables = "SELECT * FROM tables";
 				      			$sql_dc_steel = "SELECT * FROM drawer_cupboard_steel";
@@ -181,8 +195,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 				</div>
 				<div class="form-row" id="quantity-form-row">
 				    <div class="form-group col-sm-12 col-md-6 col-lg-6 sub-form-row">
-				      	<legend for="inputZip">Item Price</legend>
-				      	<input type="text" class="form-control" id="item_price" name="item_price" placeholder="Enter price of single item..." name="quantity">
+				      	<legend for="inputZip">Price</legend>
+				      	<input type="text" class="form-control" id="item_price" name="item_price" placeholder="Enter the price..." name="quantity">
 				    </div>
 				    <div class="form-group col-sm-12 col-md-4 col-lg-4 sub-form-row-left">
 				    	<legend for="inputZip">Quantity</legend>
@@ -203,10 +217,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	<script type="text/javascript">
 
 		$(document).ready(function(){
-			/*function changeType(){
+			$('#main_inventory_items').on('change',function(){
 				var main_inventory_id = $("#main_inventory_items").val();
 				$.ajax({
-					url:"fetch_sub.php",
+					url:"inventory-form.php",
 					data:{mainId:main_inventory_id},
 					dataType:"text",
 					success:function(data)
@@ -214,7 +228,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 						$('#sub_inventory_items').html(data);
 					}
 				});
-			}*/
+			});
 			$("#inventory_form").validate({
             	rules: {
             		main_location: "required",
