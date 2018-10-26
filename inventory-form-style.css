@@ -27,7 +27,7 @@ section{
 #form-section .form-divider{
 	width: 30%;
 	margin: 0 auto;
-	border-top: 3px solid #2dbc47;
+	border-top: 3px solid #dd7302;
 	margin-bottom: 40px;
 }
 #form-section form{
@@ -36,7 +36,7 @@ section{
 }
 form legend{
 	font-size: 19px;
-	background-image: linear-gradient(to right,rgba(0, 114, 181,0.9),rgba(0, 114, 181,0));
+	background-image: linear-gradient(to right,rgba(221, 115, 2,0.9),rgba(0, 114, 181,0));
 	padding-left: 10px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
@@ -62,11 +62,22 @@ form .form-row .sub-form-row{
 form .form-row .sub-form-row-left{
 	padding-left: 20px;
 }
+.fab{
+	padding-left: 10px;
+}
 #back-to-home-button{
 	width: 60%;
 	margin: 0 auto;
 	margin-top: 20px;
+}
+#back-to-home-button a{
 	box-shadow: 0 6px 8px 4px rgba(0, 0, 0, 0.2), 0 6px 20px 4px rgba(0, 0, 0, 0.19);
+}
+#back-to-home-button i{
+	padding-right: 10px;
+}
+#back-to-home-button #plus-new-item-button{
+	float: right;
 }
 #submit-button-div{
 	text-align: center;
@@ -92,6 +103,9 @@ form .form-row .sub-form-row-left{
 	}
 	form .form-row .sub-form-row{
 		padding-right: 0;
+	}
+	#back-to-home-button #plus-new-item-button{
+		float: none;
 	}
 }
 input:not([type="file"]).error,
