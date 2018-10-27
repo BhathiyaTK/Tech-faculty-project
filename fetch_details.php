@@ -29,7 +29,13 @@ if (isset($_POST['checkId'], $_POST['locationId'], $_POST['inventoryId'])) {
 			$sql1 = "SELECT * FROM chair";
 			$sql1_results = mysqli_query($conn,$sql1);
 			while ($row = mysqli_fetch_array($sql1_results)) {
-				echo $row['chair_name']." = ";
+				$sub_quantity = 0;
+				$sql_sub = "SELECT * FROM inventory_submission WHERE (Code3 = '$inventory_id_val') AND (Code4 ='$row['chair_val']')";
+				$sql_sub_result = mysqli_query($conn,$sql_sub);
+				while ($row = mysqli_fetch_array($sql_sub_result)) {
+					$sub_quantity = $sub_quantity + $row['quantity'];
+				}
+				echo $row['chair_name']." = ".$sub_quantity;
 			}
 			echo "Total Chairs = ".$total_quantity;
 		}elseif ($inventory_id_val == "2") {
