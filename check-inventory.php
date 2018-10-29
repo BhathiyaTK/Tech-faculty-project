@@ -34,22 +34,32 @@ if ($conn->connect_error) {
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('#check_inventory').click(function(){
-				var check_id = $("#check_inventory").val();
 				var location_id = $("#location").val();
 				var inventory_id = $("#inventory").val();
 				$.post(
 					"fetch_details.php",
 					{
-						checkId:check_id, 
-						locationId:location_id, 
-						inventoryId:inventory_id
+						locationId: location_id, 
+						inventoryId: inventory_id
 					},
 					function(data)
 					{
+						//displayDetails();
 						$('#details_content').html(data);
+						$('section').css('height','auto');
 					}
 				);
 			});
+			/*function displayDetails(d){
+				$.post(
+					"fetch_details.php",
+					async: false,
+					{"display": 1},
+					function(d){
+						$('#details_content').html(d);
+					}
+				);
+			}*/
 			$("#check_form").validate({
 	        	rules: {
 	        		location: "required",
@@ -59,7 +69,6 @@ if ($conn->connect_error) {
 	    			location: "Please select the location",
 			      	inventory: "Please select inventory"
 			    },
-
 			    submitHandler: function(form) {
 			      	form.submit();
 			    }
@@ -107,13 +116,11 @@ if ($conn->connect_error) {
 					</div>
 					<div class="form-divider-bottom"></div>
 					<div id="check-button-div">
-						<button type="submit" name="check" id="check_inventory" class="btn btn-success">Check Details<i class="fas fa-search"></i></button>
+						<input type="button" name="check" id="check_inventory" class="btn btn-success" value="Check Details">
 					</div>
 				</form>
 			</div>
-			<div id="details_content">
-				
-			</div>
+			<div id="details_content"></div>
 		</div>
 		<div id="back-to-home-button">
 			<a class="btn btn-danger" href="home.php">Back to Home</a>
