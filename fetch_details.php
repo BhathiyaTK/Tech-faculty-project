@@ -12,6 +12,9 @@
 	.table td{
 	   font-family: Nunito;
 	}
+	.table #td_price{
+		text-align: left;
+	}
 </style>
 <?php
 
@@ -29,7 +32,7 @@ if ($conn->connect_error) {
 $location = $_POST['locationId'];
 $inventory = $_POST['inventoryId'];
 
-if ($location == "A") {
+if (($location == "A") || ($location == "B")) {
 	if ($inventory == "$inventory") {
 		$sql_item = "SELECT * FROM chair";
 		$sql_chair_result = mysqli_query($conn,$sql_item);
@@ -39,6 +42,7 @@ if ($location == "A") {
 				<tr class="bg-primary">
 					<th scope="col">Inventory Name</th>
 					<th scope="col">Inventory Quantity</th>
+					<th scope="col">Inventory Price</th>
 				</tr>
 			</thead>
 			<tbody class="table-hover">
@@ -47,29 +51,36 @@ if ($location == "A") {
 			$chair_vl = $row['chair_val'];
 			$chair_nm = $row['chair_name'];
 
-			$sql_sub_total = "SELECT SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=1 AND Code4=$chair_vl";
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=1 AND Code4=$chair_vl";
 			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
 			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
-				//echo $chair_nm." = ".$row['sub_total']."<br>";
-			
 	?>
 				<tr>
 					<td><?php echo $chair_nm; ?></td>
 					<td><?php echo $row['sub_total']; ?></td>
+					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
 				</tr>
 	<?php
 			}
-			
 		}
 
-		$sql_total = "SELECT SUM(Quantity) AS total FROM inventory_submission WHERE Code1='$location' AND Code3='$inventory'";
+		$sql_total = "SELECT Price, Quantity, SUM(Quantity) AS total FROM inventory_submission WHERE Code1='$location' AND Code3='$inventory'";
 		$sql_result = mysqli_query($conn,$sql_total);
 		while ($row = mysqli_fetch_array($sql_result)) {
 			//echo "Total Chairs = ".$row['total'];
 			?>
 				<tr class="bg-danger">
-					<th scope="col"><?php echo "Total Chairs"; ?></th>
+					<th scope="col"><?php echo "Total"; ?></th>
 					<th scope="col"><?php echo $row['total']; ?></th>
+					<?php  
+						$value = "SELECT SUM(Price*Quantity) AS total_price FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory";
+						$val_result = mysqli_query($conn,$value);
+						foreach ($val_result as $row) {
+					?>
+					<th scope="col"><?php echo "Rs.".$row['total_price']."/-"; ?></th>
+					<?php
+						}
+					?>
 				</tr>
 			<?php
 		}
