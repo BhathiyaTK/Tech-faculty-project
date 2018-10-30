@@ -34,8 +34,8 @@ $inventory = $_POST['inventoryId'];
 
 if (($location == "A") || ($location == "B")) {
 	if ($inventory == "$inventory") {
-		$sql_item = "SELECT * FROM chair";
-		$sql_chair_result = mysqli_query($conn,$sql_item);
+		$sql_item = "SELECT * FROM sub_inventory WHERE sub_main_val=$inventory";
+		$sql_item_result = mysqli_query($conn,$sql_item);
 	?>
 		<table class="table table-striped table-dark table-bordered table-sm center">
 			<thead>
@@ -47,16 +47,16 @@ if (($location == "A") || ($location == "B")) {
 			</thead>
 			<tbody class="table-hover">
 	<?php
-		while ($row = mysqli_fetch_array($sql_chair_result)) {
-			$chair_vl = $row['chair_val'];
-			$chair_nm = $row['chair_name'];
+		while ($row = mysqli_fetch_array($sql_item_result)) {
+			$item_vl = $row['sub_val'];
+			$item_nm = $row['sub_name'];
 
-			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=1 AND Code4=$chair_vl";
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory AND Code4=$item_vl";
 			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
 			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
 	?>
 				<tr>
-					<td><?php echo $chair_nm; ?></td>
+					<td><?php echo $item_nm; ?></td>
 					<td><?php echo $row['sub_total']; ?></td>
 					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
 				</tr>
