@@ -18,89 +18,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$new_inventory = $_POST["new_inventory"];
 
 		if ($new_inventory != "") {
-			if ($table_request == "1") {
-				$add_inventory = "INSERT INTO chair(chair_name) VALUES($new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "2") {
-				$add_inventory = "INSERT INTO tables(tables_val,tables_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "3") {
-				$add_inventory = "INSERT INTO drawer_cupboard_steel(dcupboard_val,dcupboard_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "4") {
-				$add_inventory = "INSERT INTO wood_book_rack(wbook_rack_val,wbook_rack_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "5") {
-				$add_inventory = "INSERT INTO computer(computer_val,computer_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "6") {
-				$add_inventory = "INSERT INTO steel_cupboard(scupboard_val,scupboard_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "7") {
-				$add_inventory = "INSERT INTO photocopy_machine(pmachine_val,pmachine_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "8") {
-				$add_inventory = "INSERT INTO projector_screen(pscreen_val,pscreen_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "9") {
-				$add_inventory = "INSERT INTO network_cable(ncable_val,ncable_name) VALUES('','$new_inventory')";
-				if ($conn->query($add_inventory)) {
-            		$message = "Inventory added successfully.";
-            		echo "<script type='text/javascript'>alert('$message');</script>";
-	            }else{
-	            	$message = "Process Failed! Please check the internet connection & Try again.";
-					echo "<script type='text/javascript'>alert('$message');</script>";
-	            }
-			}elseif ($table_request == "10") {
-				$add_inventory = "INSERT INTO fan(fan_val,fan_name) VALUES('','$new_inventory')";
+
+			$sql = "SELECT MAX(sub_val) AS max_val FROM sub_inventory WHERE sub_main_val=$table_request";
+			$sql_result = mysqli_query($conn,$sql);
+			//while($row = mysqli_fetch_array($sql_result))
+			foreach ($sql_result as $row) {
+				$max = $row['max_val'];
+				$up_max = ++$max;
+
+				$add_inventory = "INSERT INTO sub_inventory(sub_main_val,sub_val,sub_name) VALUES('$table_request','$up_max','$new_inventory')";
 				if ($conn->query($add_inventory)) {
             		$message = "Inventory added successfully.";
             		echo "<script type='text/javascript'>alert('$message');</script>";
