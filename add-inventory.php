@@ -87,16 +87,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<div id="form-content">
 				<form id="new_inventory_form" action="add-inventory.php" method="POST">
 					<div class="form-group main-select-list">
+					    <legend>Location</legend>
+					    <select class="form-control" id="main_location_select" name="main_location">
+					    	<option value="">Select the location...</option>
+					    	<?php
+
+				    		$sql_main_location = "SELECT * FROM main_locations";
+				    		$main_loc_results = mysqli_query($conn,$sql_main_location);
+
+				    		while ($row = mysqli_fetch_array($main_loc_results)) {
+				    			echo "<option value=".$row['main_val'].">".$row['main_location']."</option>";
+				    		}
+
+				    		?>
+					    </select>
+					</div>
+					<div class="form-group main-select-list">
 					    <legend>Inventory Category</legend>
 					    <select class="form-control" id="main_inventory_category" name="main_inventory">
 					    	<option value="">Select main inventory category...</option>
 					    	<?php
 
-				    		$sql_main_inventory = "SELECT * FROM main_inventory_item";
+				    		$sql_main_inventory = "SELECT * FROM main_inventory";
 				    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
 
 				    		while ($row = mysqli_fetch_array($main_inv_results)) {
-				    			echo "<option value=".$row['main_inventory_val'].">".$row['main_inventory_item']."</option>";
+				    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
 				    		}
 
 				    		?>
