@@ -44,22 +44,12 @@ if ($conn->connect_error) {
 					},
 					function(data)
 					{
-						//displayDetails();
 						$('#details_content').html(data);
 						$('section').css('height','auto');
+						$('section').css('padding-bottom','100px');
 					}
 				);
 			});
-			/*function displayDetails(d){
-				$.post(
-					"fetch_details.php",
-					async: false,
-					{"display": 1},
-					function(d){
-						$('#details_content').html(d);
-					}
-				);
-			}*/
 			$("#check_form").validate({
 	        	rules: {
 	        		location: "required",
@@ -94,6 +84,9 @@ if ($conn->connect_error) {
 					    		<option value="B">New Building</option>
 					    		<option value="A.1">Department of Engineering Technology</option>
 					    		<option value="B.3">Department of Bio System</option>
+					    		<option value="C">Physics Lab</option>
+					    		<option value="D">Chemistry Lab</option>
+					    		<option value="E">Bio Lab</option>
 					    		<option value="all">All</option>
 					      	</select>	
 					    </div>
@@ -103,11 +96,11 @@ if ($conn->connect_error) {
 					      		<option value="">Choose...</option>
 					      		<?php
 
-					    		$sql_main_inventory = "SELECT * FROM main_inventory_item";
+					    		$sql_main_inventory = "SELECT * FROM main_inventory";
 					    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
 
 					    		while ($row = mysqli_fetch_array($main_inv_results)) {
-					    			echo "<option value=".$row['main_inventory_val'].">".$row['main_inventory_item']."</option>";
+					    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
 					    		}
 
 					    		?>
