@@ -18,8 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     	$code1 = $_POST["main_location"];
         $code2 = $_POST["sub_locations"];
-        $code3 = $_POST["sub_locations"].".".$_POST["main_inventory_items"];
-        $code4 = $_POST["sub_locations"].".".$_POST["main_inventory_items"].".".$_POST["sub_inventory_items"];
+        $code3 = $_POST["main_inventory_items"];
+        $code4 = $_POST["sub_inventory_items"];
         $item_price = $_POST["item_price"];
         $quantity = $_POST["quantity"];
 
@@ -171,15 +171,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 					    <legend for="inputState">Main Inventory Item</legend>
 				      	<select id="main_inventory_items" class="form-control" name="main_inventory_items">
 				      		<option value="">Choose...</option>
-				      		<?php
+				      		<?php	
 
-				    		$sql_main_inventory = "SELECT * FROM main_inventory_item";
-				    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
+				      		$sql_sub_loations = "SELECT * FROM main_inventory";
+				    		$sub_loc_results = mysqli_query($conn,$sql_sub_loations);
 
-				    		while ($row = mysqli_fetch_array($main_inv_results)) {
-				    			echo "<option value=".$row['main_inventory_val'].">".$row['main_inventory_item']."</option>";
+				    		while ($row = mysqli_fetch_array($sub_loc_results)) {
+				    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
 				    		}
-
 				    		?>
 				      	</select>
 					</div>
