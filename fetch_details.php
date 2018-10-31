@@ -68,7 +68,7 @@ if (($location == "A") || ($location == "B")) {
 		$sql_result = mysqli_query($conn,$sql_total);
 		while ($row = mysqli_fetch_array($sql_result)) {
 			//echo "Total Chairs = ".$row['total'];
-			?>
+	?>
 				<tr class="bg-danger">
 					<th scope="col"><?php echo "Total"; ?></th>
 					<th scope="col"><?php echo $row['total']; ?></th>
@@ -82,13 +82,299 @@ if (($location == "A") || ($location == "B")) {
 						}
 					?>
 				</tr>
-			<?php
+	<?php
 		}
 	?>
 			</tbody>
 		</table>
 	<?php
 	}
-}
+}elseif ($location == "C") {
+	if ($inventory == "$inventory") {
+		$sql_item = "SELECT * FROM physics_lab_inventory WHERE physics_main_val=$inventory";
+		$sql_item_result = mysqli_query($conn,$sql_item);
+	?>
+		<table class="table table-striped table-dark table-bordered table-sm center">
+			<thead>
+				<tr class="bg-primary">
+					<th scope="col">Inventory Name</th>
+					<th scope="col">Inventory Quantity</th>
+					<th scope="col">Inventory Price</th>
+				</tr>
+			</thead>
+			<tbody class="table-hover">
+	<?php
+		while ($row = mysqli_fetch_array($sql_item_result)) {
+			$item_vl = $row['physics_sub_val'];
+			$item_nm = $row['physics_sub_name'];
 
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory AND Code4=$item_vl";
+			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
+			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
+	?>
+				<tr>
+					<td><?php echo $item_nm; ?></td>
+					<td><?php echo $row['sub_total']; ?></td>
+					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
+				</tr>
+	<?php
+			}
+		}
+
+		$sql_total = "SELECT Price, Quantity, SUM(Quantity) AS total FROM inventory_submission WHERE Code1='$location' AND Code3='$inventory'";
+		$sql_result = mysqli_query($conn,$sql_total);
+		while ($row = mysqli_fetch_array($sql_result)) {
+			//echo "Total Chairs = ".$row['total'];
+	?>
+				<tr class="bg-danger">
+					<th scope="col"><?php echo "Total"; ?></th>
+					<th scope="col"><?php echo $row['total']; ?></th>
+					<?php  
+						$value = "SELECT SUM(Price*Quantity) AS total_price FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory";
+						$val_result = mysqli_query($conn,$value);
+						foreach ($val_result as $row) {
+					?>
+					<th scope="col"><?php echo "Rs.".$row['total_price']."/-"; ?></th>
+					<?php
+						}
+					?>
+				</tr>
+	<?php
+		}
+	?>
+			</tbody>
+		</table>
+	<?php
+	}
+}elseif ($location == "D") {
+	if ($inventory == "$inventory") {
+		$sql_item = "SELECT * FROM chemistry_lab_inventory WHERE chem_main_val=$inventory";
+		$sql_item_result = mysqli_query($conn,$sql_item);
+	?>
+		<table class="table table-striped table-dark table-bordered table-sm center">
+			<thead>
+				<tr class="bg-primary">
+					<th scope="col">Inventory Name</th>
+					<th scope="col">Inventory Quantity</th>
+					<th scope="col">Inventory Price</th>
+				</tr>
+			</thead>
+			<tbody class="table-hover">
+	<?php
+		while ($row = mysqli_fetch_array($sql_item_result)) {
+			$item_vl = $row['chem_sub_val'];
+			$item_nm = $row['chem_sub_name'];
+
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory AND Code4=$item_vl";
+			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
+			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
+	?>
+				<tr>
+					<td><?php echo $item_nm; ?></td>
+					<td><?php echo $row['sub_total']; ?></td>
+					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
+				</tr>
+	<?php
+			}
+		}
+
+		$sql_total = "SELECT Price, Quantity, SUM(Quantity) AS total FROM inventory_submission WHERE Code1='$location' AND Code3='$inventory'";
+		$sql_result = mysqli_query($conn,$sql_total);
+		while ($row = mysqli_fetch_array($sql_result)) {
+			//echo "Total Chairs = ".$row['total'];
+	?>
+				<tr class="bg-danger">
+					<th scope="col"><?php echo "Total"; ?></th>
+					<th scope="col"><?php echo $row['total']; ?></th>
+					<?php  
+						$value = "SELECT SUM(Price*Quantity) AS total_price FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory";
+						$val_result = mysqli_query($conn,$value);
+						foreach ($val_result as $row) {
+					?>
+					<th scope="col"><?php echo "Rs.".$row['total_price']."/-"; ?></th>
+					<?php
+						}
+					?>
+				</tr>
+	<?php
+		}
+	?>
+			</tbody>
+		</table>
+	<?php
+	}
+}elseif ($location == "E") {
+	if ($inventory == "$inventory") {
+		$sql_item = "SELECT * FROM bio_lab_inventory WHERE bio_main_val=$inventory";
+		$sql_item_result = mysqli_query($conn,$sql_item);
+	?>
+		<table class="table table-striped table-dark table-bordered table-sm center">
+			<thead>
+				<tr class="bg-primary">
+					<th scope="col">Inventory Name</th>
+					<th scope="col">Inventory Quantity</th>
+					<th scope="col">Inventory Price</th>
+				</tr>
+			</thead>
+			<tbody class="table-hover">
+	<?php
+		while ($row = mysqli_fetch_array($sql_item_result)) {
+			$item_vl = $row['bio_sub_val'];
+			$item_nm = $row['bio_sub_name'];
+
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory AND Code4=$item_vl";
+			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
+			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
+	?>
+				<tr>
+					<td><?php echo $item_nm; ?></td>
+					<td><?php echo $row['sub_total']; ?></td>
+					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
+				</tr>
+	<?php
+			}
+		}
+
+		$sql_total = "SELECT Price, Quantity, SUM(Quantity) AS total FROM inventory_submission WHERE Code1='$location' AND Code3='$inventory'";
+		$sql_result = mysqli_query($conn,$sql_total);
+		while ($row = mysqli_fetch_array($sql_result)) {
+			//echo "Total Chairs = ".$row['total'];
+	?>
+				<tr class="bg-danger">
+					<th scope="col"><?php echo "Total"; ?></th>
+					<th scope="col"><?php echo $row['total']; ?></th>
+					<?php  
+						$value = "SELECT SUM(Price*Quantity) AS total_price FROM inventory_submission WHERE Code1='$location' AND Code3=$inventory";
+						$val_result = mysqli_query($conn,$value);
+						foreach ($val_result as $row) {
+					?>
+					<th scope="col"><?php echo "Rs.".$row['total_price']."/-"; ?></th>
+					<?php
+						}
+					?>
+				</tr>
+	<?php
+		}
+	?>
+			</tbody>
+		</table>
+	<?php
+	}
+}elseif (($location == "A.1") || ($location == "B.3")) {
+	if ($inventory == "$inventory") {
+		$sql_item = "SELECT * FROM sub_inventory WHERE sub_main_val=$inventory";
+		$sql_item_result = mysqli_query($conn,$sql_item);
+	?>
+		<table class="table table-striped table-dark table-bordered table-sm center">
+			<thead>
+				<tr class="bg-primary">
+					<th scope="col">Inventory Name</th>
+					<th scope="col">Inventory Quantity</th>
+					<th scope="col">Inventory Price</th>
+				</tr>
+			</thead>
+			<tbody class="table-hover">
+	<?php
+		while ($row = mysqli_fetch_array($sql_item_result)) {
+			$item_vl = $row['sub_val'];
+			$item_nm = $row['sub_name'];
+
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code2='$location' AND Code3=$inventory AND Code4=$item_vl";
+			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
+			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
+	?>
+				<tr>
+					<td><?php echo $item_nm; ?></td>
+					<td><?php echo $row['sub_total']; ?></td>
+					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
+				</tr>
+	<?php
+			}
+		}
+
+		$sql_total = "SELECT Price, Quantity, SUM(Quantity) AS total FROM inventory_submission WHERE Code2='$location' AND Code3='$inventory'";
+		$sql_result = mysqli_query($conn,$sql_total);
+		while ($row = mysqli_fetch_array($sql_result)) {
+			//echo "Total Chairs = ".$row['total'];
+	?>
+				<tr class="bg-danger">
+					<th scope="col"><?php echo "Total"; ?></th>
+					<th scope="col"><?php echo $row['total']; ?></th>
+					<?php  
+						$value = "SELECT SUM(Price*Quantity) AS total_price FROM inventory_submission WHERE Code2='$location' AND Code3=$inventory";
+						$val_result = mysqli_query($conn,$value);
+						foreach ($val_result as $row) {
+					?>
+					<th scope="col"><?php echo "Rs.".$row['total_price']."/-"; ?></th>
+					<?php
+						}
+					?>
+				</tr>
+	<?php
+		}
+	?>
+			</tbody>
+		</table>
+	<?php
+	}
+}elseif ($location == "all") {
+	if ($inventory == "$inventory") {
+		$sql_item = "SELECT * FROM sub_inventory WHERE sub_main_val=$inventory";
+		$sql_item_result = mysqli_query($conn,$sql_item);
+	?>
+		<table class="table table-striped table-dark table-bordered table-sm center">
+			<thead>
+				<tr class="bg-primary">
+					<th scope="col">Inventory Name</th>
+					<th scope="col">Inventory Quantity</th>
+					<th scope="col">Inventory Price</th>
+				</tr>
+			</thead>
+			<tbody class="table-hover">
+	<?php
+		while ($row = mysqli_fetch_array($sql_item_result)) {
+			$item_vl = $row['sub_val'];
+			$item_nm = $row['sub_name'];
+
+			$sql_sub_total = "SELECT Price, SUM(Quantity) AS sub_total FROM inventory_submission WHERE Code3=$inventory AND Code4=$item_vl";
+			$sql_sub_total_result = mysqli_query($conn,$sql_sub_total);
+			while ($row = mysqli_fetch_array($sql_sub_total_result)) {
+	?>
+				<tr>
+					<td><?php echo $item_nm; ?></td>
+					<td><?php echo $row['sub_total']; ?></td>
+					<td id="td_price"><?php echo "(Rs.".$row['Price']."/- X ".$row['sub_total'].") = Rs.".$row['Price']*$row['sub_total']."/-"; ?></td>
+				</tr>
+	<?php
+			}
+		}
+
+		$sql_total = "SELECT Price, Quantity, SUM(Quantity) AS total FROM inventory_submission WHERE Code3='$inventory'";
+		$sql_result = mysqli_query($conn,$sql_total);
+		while ($row = mysqli_fetch_array($sql_result)) {
+			//echo "Total Chairs = ".$row['total'];
+	?>
+				<tr class="bg-danger">
+					<th scope="col"><?php echo "Total"; ?></th>
+					<th scope="col"><?php echo $row['total']; ?></th>
+					<?php  
+						$value = "SELECT SUM(Price*Quantity) AS total_price FROM inventory_submission WHERE Code3=$inventory";
+						$val_result = mysqli_query($conn,$value);
+						foreach ($val_result as $row) {
+					?>
+					<th scope="col"><?php echo "Rs.".$row['total_price']."/-"; ?></th>
+					<?php
+						}
+					?>
+				</tr>
+	<?php
+		}
+	?>
+			</tbody>
+		</table>
+	<?php
+	}
+}else{
+	echo "<script>alert('Please select the location & inventory!');</script>";
+}
 ?>
