@@ -86,37 +86,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			<div class="form-divider"></div>
 			<div id="form-content">
 				<form id="new_inventory_form" action="add-inventory.php" method="POST">
-					<div class="form-group main-select-list">
-					    <legend>Location</legend>
-					    <select class="form-control" id="main_location_select" name="main_location">
-					    	<option value="">Select the location...</option>
-					    	<?php
+					<div class="row">
+						<div class="form-group main-select-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						    <legend>Location</legend>
+						    <select class="form-control" id="main_location_select" name="main_location">
+						    	<option value="">Select the location...</option>
+						    	<?php
 
-				    		$sql_main_location = "SELECT * FROM main_locations";
-				    		$main_loc_results = mysqli_query($conn,$sql_main_location);
+					    		$sql_main_location = "SELECT * FROM main_locations";
+					    		$main_loc_results = mysqli_query($conn,$sql_main_location);
 
-				    		while ($row = mysqli_fetch_array($main_loc_results)) {
-				    			echo "<option value=".$row['main_val'].">".$row['main_location']."</option>";
-				    		}
+					    		while ($row = mysqli_fetch_array($main_loc_results)) {
+					    			echo "<option value=".$row['main_val'].">".$row['main_location']."</option>";
+					    		}
 
-				    		?>
-					    </select>
-					</div>
-					<div class="form-group main-select-list">
-					    <legend>Inventory Category</legend>
-					    <select class="form-control" id="main_inventory_category" name="main_inventory">
-					    	<option value="">Select main inventory category...</option>
-					    	<?php
+					    		?>
+						    </select>
+						</div>
+						<div class="form-group main-select-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
+						    <legend>Inventory Category</legend>
+						    <select class="form-control" id="main_inventory_category" name="main_inventory">
+						    	<option value="">Select inventory category...</option>
+						    	<?php
 
-				    		$sql_main_inventory = "SELECT * FROM main_inventory";
-				    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
+					    		$sql_main_inventory = "SELECT * FROM main_inventory";
+					    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
 
-				    		while ($row = mysqli_fetch_array($main_inv_results)) {
-				    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
-				    		}
+					    		while ($row = mysqli_fetch_array($main_inv_results)) {
+					    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
+					    		}
 
-				    		?>
-					    </select>
+					    		?>
+						    </select>
+						</div>
 					</div>
 					<div class="form-group">
 					    <legend>Inventory Name</legend>
