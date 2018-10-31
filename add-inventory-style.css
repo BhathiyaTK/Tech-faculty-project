@@ -11,7 +11,7 @@ section{
 	padding: 50px 0;
 }
 #add-inventory-form-div{
-	width: 45%;
+	width: 55%;
 	margin: 0 auto;
 	color: #fff;
 	background-color: rgba(0,0,0,0.8);
@@ -32,7 +32,7 @@ section{
 
 }
 #add-inventory-form-div #form-content{
-	width: 65%;
+	width: 75%;
 	margin: 0 auto;
 }
 form legend{
@@ -59,7 +59,7 @@ form legend{
 	text-align: center;
 }
 #back-to-home-button{
-	width: 45%;
+	width: 55%;
 	margin: 0 auto;
 	margin-top: 20px;
 }
