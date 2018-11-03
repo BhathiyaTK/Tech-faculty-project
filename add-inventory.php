@@ -14,10 +14,13 @@ if ($conn->connect_error) {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (isset($_POST["add"])) {
 		
+		$main_location = $_POST['main_location'];
 		$table_request = $_POST["main_inventory"];
 		$new_inventory = $_POST["new_inventory"];
 
 		if ($new_inventory != "") {
+
+			
 
 			$sql = "SELECT MAX(sub_val) AS max_val FROM sub_inventory WHERE sub_main_val=$table_request";
 			$sql_result = mysqli_query($conn,$sql);
@@ -84,52 +87,92 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				<h1>Add New Inventory</h1>
 			</div>
 			<div class="form-divider"></div>
-			<div id="form-content">
-				<form id="new_inventory_form" action="add-inventory.php" method="POST">
-					<div class="row">
-						<div class="form-group main-select-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
-						    <legend>Location</legend>
-						    <select class="form-control" id="main_location_select" name="main_location">
-						    	<option value="">Select the location...</option>
-						    	<?php
+			<div class="row">
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<div id="form-content">
+						<form id="new_inventory_form" action="add-inventory.php" method="POST">
+							<div class="head_msg">
+								<div class="row">
+									<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+										<i class="fas fa-exclamation-circle warning-msg"></i>
+									</div>
+									<div class="col-sm-11 col-md-11 col-lg-11 col-xl-11">
+										<p>If <span>main inventory</span> is not exist, add main inventory from below form.</p>
+									</div>
+								</div>
+							</div>
+							<div class="form-group main-select-list">
+							    <legend>Location</legend>
+							    <select class="form-control" id="main_location_select" name="main_location">
+							    	<option value="">Select the location...</option>
+							    	<?php
 
-					    		$sql_main_location = "SELECT * FROM main_locations";
-					    		$main_loc_results = mysqli_query($conn,$sql_main_location);
+						    		$sql_main_location = "SELECT * FROM main_locations";
+						    		$main_loc_results = mysqli_query($conn,$sql_main_location);
 
-					    		while ($row = mysqli_fetch_array($main_loc_results)) {
-					    			echo "<option value=".$row['main_val'].">".$row['main_location']."</option>";
-					    		}
+						    		while ($row = mysqli_fetch_array($main_loc_results)) {
+						    			echo "<option value=".$row['main_val'].">".$row['main_location']."</option>";
+						    		}
 
-					    		?>
-						    </select>
-						</div>
-						<div class="form-group main-select-list col-sm-12 col-md-6 col-lg-6 col-xl-6">
-						    <legend>Inventory Category</legend>
-						    <select class="form-control" id="main_inventory_category" name="main_inventory">
-						    	<option value="">Select inventory category...</option>
-						    	<?php
-
-					    		$sql_main_inventory = "SELECT * FROM main_inventory";
-					    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
-
-					    		while ($row = mysqli_fetch_array($main_inv_results)) {
-					    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
-					    		}
-
-					    		?>
-						    </select>
-						</div>
+						    		?>
+							    </select>
+							</div>
+							<div class="form-group">
+							    <legend>Main Inventory Name</legend>
+							    <input type="text" name="new_inventory" class="form-control" id="formGroupExampleInput" placeholder="Enter main inventory name here...">
+							</div>
+							<div class="form-divider-bottom"></div>
+							<div id="add-inventory-button-div">
+								<button type="submit" name="add" class="btn btn-success">Add main item<i class="fab fa-telegram-plane"></i></button>
+							</div>
+						</form>
 					</div>
-					<div class="form-group">
-					    <legend>Inventory Name</legend>
-					    <input type="text" name="new_inventory" class="form-control" id="formGroupExampleInput" placeholder="Enter sub inventory name here...">
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<div id="form-content">
+						<form id="new_inventory_form" action="add-inventory.php" method="POST">
+							<div class="head_msg">
+								<div class="row">
+									<div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
+										<i class="fas fa-exclamation-circle warning-msg"></i>
+									</div>
+									<div class="col-sm-11 col-md-11 col-lg-11 col-xl-11">
+										<p>If only <span>sub inventory</span> has to add, add sub inventory from below form.</p>
+									</div>
+								</div>
+							</div>
+							<div class="head_msg">
+								
+							</div>
+							<div class="form-group main-select-list">
+							    <legend>Main Inventory Category</legend>
+							    <select class="form-control" id="main_inventory_category" name="main_inventory">
+							    	<option value="">Select main inventory category...</option>
+							    	<?php
+
+						    		$sql_main_inventory = "SELECT * FROM main_inventory";
+						    		$main_inv_results = mysqli_query($conn,$sql_main_inventory);
+
+						    		while ($row = mysqli_fetch_array($main_inv_results)) {
+						    			echo "<option value=".$row['main_item_val'].">".$row['main_item_name']."</option>";
+						    		}
+
+						    		?>
+							    </select>
+							</div>
+							<div class="form-group">
+							    <legend>Sub Inventory Name</legend>
+							    <input type="text" name="new_inventory" class="form-control" id="formGroupExampleInput" placeholder="Enter sub inventory name here...">
+							</div>
+							<div class="form-divider-bottom"></div>
+							<div id="add-inventory-button-div">
+								<button type="submit" name="add" class="btn btn-success">Add sub item<i class="fab fa-telegram-plane"></i></button>
+							</div>
+						</form>
 					</div>
-					<div class="form-divider-bottom"></div>
-					<div id="add-inventory-button-div">
-						<button type="submit" name="add" class="btn btn-success">Add Inventory<i class="fab fa-telegram-plane"></i></button>
-					</div>
-				</form>
+				</div>
 			</div>
+			
 		</div>
 		<div id="back-to-home-button">
 			<a class="btn btn-danger" href="home.php">Back to Home</a>
