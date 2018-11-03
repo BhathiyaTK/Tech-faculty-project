@@ -27,7 +27,7 @@ section{
 #form-section .form-divider{
 	width: 30%;
 	margin: 0 auto;
-	border-top: 3px solid #dd7302;
+	border-top: 3px solid #90c115;
 	margin-bottom: 40px;
 }
 #form-section form{
@@ -36,7 +36,7 @@ section{
 }
 form legend{
 	font-size: 19px;
-	background-image: linear-gradient(to right,rgba(221, 115, 2,0.9),rgba(0, 114, 181,0));
+	background-image: linear-gradient(to right,rgba(144, 193, 21,0.9),rgba(144, 193, 21,0));
 	padding-left: 10px;
 	border-top-left-radius: 5px;
 	border-bottom-left-radius: 5px;
