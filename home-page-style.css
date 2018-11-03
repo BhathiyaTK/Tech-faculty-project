@@ -43,6 +43,7 @@ section{
 	padding-top: 30px;
 	text-shadow: 5px 5px 10px #000;
 	margin-bottom: 20px;
+	letter-spacing: 2px;
 }
 .home-page-content-divider{
 	width: 30%;
@@ -70,7 +71,7 @@ section{
 	background-color: rgb(15, 64, 96);
 }
 #home-page-buttons-center{
-	background-color: rgb(216, 122, 21);
+	background-color: rgb(100, 135, 13);
 }
 #home-page-buttons-right{
 	background-color: rgb(146, 14, 153);
