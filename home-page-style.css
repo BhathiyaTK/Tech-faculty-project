@@ -3,12 +3,13 @@
 	padding: 0;
 	font-family: Nunito;
 }
-section{
+.main-section{
 	width: 100%;
 	background-image: url(images/sabra-tech-faculty.jpg);
 	background-position: bottom center;
 	background-size: cover;
 	background-repeat: no-repeat;
+	background-attachment: fixed;
 }
 #home-page-content{
 	height: 100vh;
@@ -23,7 +24,6 @@ section{
 }
 #page-header h1{
 	color: #fff;
-	font-family: Roboto;
 	font-size: 50px;
 }
 #home-page-sub-content{
